@@ -33,12 +33,15 @@
 
 		<button
 			type="submit"
-			class="w-full rounded-lg bg-blue-500 p-3 text-white hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+			class="w-full rounded-lg bg-teal-500 p-3 text-white hover:bg-teal-600 focus:ring-2 focus:ring-teal-500 focus:outline-none"
 			>Login</button
 		>
 
 		{#if form}
 			<Warning message={form.message} class="mt-4" />
 		{/if}
+		<a href="/" class="text-teal-400 ml-40 ">Go back</a>
 	</form>
+
+	
 </div>
