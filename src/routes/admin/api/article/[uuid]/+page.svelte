@@ -46,12 +46,17 @@
                     <p class="font-mono text-xs"><strong>Comment:</strong> {comment.text}</p>
                     <div class="flex items-center justify-between">
                       <form action="?/likeComment" method="POST">
+                        <input type="hidden" name="likeId" value={comment.id}>
                         <button type="submit" class="text-xs px-1 py-0.4 text-black bg-white border border-gray-300 rounded hover:bg-red-500 hover:text-white transition-all h-5">
                           Like
                       </button>
                       </form>
-                    <p class="font-mono text-[0.6rem] text-right">Likes: 0</p>
+                    <p class="font-mono text-[0.6rem] text-right">Likes: {comment.likes}</p>
                   </div>
+                  <details>
+                    <summary class="cursor-pointer">View replys</summary>
+                    <p>True very nice eyes</p>
+                  </details>
 
                 </div>
             {/if}

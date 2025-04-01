@@ -33,5 +33,13 @@ export const actions = {
 
         const connection = await createConnection();
         await connection.execute('UPDATE articles SET votes = votes + 1 WHERE id = ?', [voteId]);
-    }
+    },
+	likeComment: async ({ request }) =>{
+		const formData = await request.formData();
+		const likeId = await formData.get('likeId');
+		
+		const connection = await createConnection();
+		await connection.execute('UPDATE comments SET likes = likes + 1 where id = ?',[likeId]);
+
+	}
 };
