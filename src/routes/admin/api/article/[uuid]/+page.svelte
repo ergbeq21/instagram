@@ -74,9 +74,7 @@
                       </div>
                     {/if}
                   {/each}
-                  
-                  <details class="text-x">
-                    <summary class="cursor-pointer">Write a reply</summary>
+
                     <form action="?/writeReply" method="POST" class="p-4 flex flex-col text-black">
                       <input type="hidden" value={comment.id} name="commentID">
                       <input placeholder="Your name" type="text" name="nameReply" class="border border-gray-300 rounded p-1 text-sm my-1">
@@ -84,7 +82,6 @@
                       <button type="submit" class="bg-blue-500 text-white py-1 rounded text-sm hover:bg-blue-600 transition">Send</button>
                     </form>
 
-                  </details>
                   </details>
 
                 </div>

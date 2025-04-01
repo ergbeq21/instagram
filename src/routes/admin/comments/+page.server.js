@@ -12,9 +12,11 @@ export async function load({ locals }) {
 	let connection = await createConnection();
 
 	let [rows] = await connection.execute('select * from comments;');
+	let [ replyRows ] = await connection.execute('select * from reply;'); 
 
 	return {
-		comments: rows
+		comments: rows,
+		replies: replyRows
 	};
 }
 
@@ -30,5 +32,11 @@ export const actions = {
 
 		await connection.execute('Delete from comments where id = ?', [id]);
 		
-}
+   },
+   deleteReply: async ({ request }) =>{
+	const formData = await request.formData();
+	const replyId = formData.get('replyId');
+	const connection = await createConnection();
+	await connection.execute('delete from reply where id = ?',[replyId]);
+   }
 }

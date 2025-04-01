@@ -24,6 +24,29 @@
 					Delete
 				</button>
 			</form>
+
+			
+			<details class="cursor-pointer pl-5">
+				{#each data.replies as reply }
+				<summary>See all replies for this comment</summary>
+				  <p class="font-mono text-xs">ID: {reply.id}</p>
+			      <p class="font-mono text-xs">NAME: {reply.name}</p>
+			      <p class="font-mono text-xs">REPLY: {reply.text}</p>
+
+			    <form action="?/deleteReply" method="POST">
+				<input type="hidden" name="replyId" value={reply.id} />
+				<button
+					type="submit"
+					class=" text-xs pt-1 cursor-pointer rounded-md bg-red-600 px-4 py-2 text-white transition duration-300 hover:bg-red-700"
+				>
+					Delete
+				</button>
+			</form>
+			{/each}
+			</details>
+				
+			
+			
 		</div>
 	{/each}
 </main>
