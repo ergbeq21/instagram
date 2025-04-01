@@ -25,14 +25,10 @@ export const actions = {
 		const id = formData.get('id');
 		const connection = await createConnection();
 
-		try {
-			await connection.execute('Delete from comments where id = ?', [id]);
-		} catch (e) {
-			console.error(e);
-			return {
-				success: false,
-				message: 'Delete not possible!'
-			};
-		}
-    }
+		//await connection.execute('update reply set comment_id = null where comment_id = ?',[id]);
+		await connection.execute('delete from reply where comment_id = ? ',[id]);
+
+		await connection.execute('Delete from comments where id = ?', [id]);
+		
+}
 }

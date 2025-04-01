@@ -2,7 +2,7 @@
     import { onMount } from 'svelte';
     import { page } from '$app/stores';
     import { get } from 'svelte/store';
-    let { data } = $props();
+    let { data, form } = $props();
 
 
     let article = $state();
@@ -55,7 +55,36 @@
                   </div>
                   <details>
                     <summary class="cursor-pointer">View replys</summary>
-                    <p>True very nice eyes</p>
+                     
+
+                    {#each data.replys as reply}
+                    {#if reply.comment_id == comment.id}
+                      <div class="bg-blue-400 text-white p-1.5 my-1 rounded-lg text-left shadow-md">
+                        <p class="font-mono text-xs"><strong>From:</strong> {reply.name}</p>
+                        <p class="font-mono text-xs"><strong>Reply:</strong> {reply.text}</p>
+                        <div class="flex items-center justify-between">
+                          <form action="?/likeReply" method="POST">
+                            <input type="hidden" name="replylikeId" value={reply.id}>
+                            <button type="submit" class="text-xs px-1 py-0.4 text-black bg-white border border-gray-300 rounded hover:bg-red-500 hover:text-white transition-all h-5">
+                              Like
+                            </button>
+                          </form>
+                          <p class="font-mono text-[0.6rem] text-right">Likes: {reply.likes}</p>
+                        </div>
+                      </div>
+                    {/if}
+                  {/each}
+                  
+                  <details class="text-x">
+                    <summary class="cursor-pointer">Write a reply</summary>
+                    <form action="?/writeReply" method="POST" class="p-4 flex flex-col text-black">
+                      <input type="hidden" value={comment.id} name="commentID">
+                      <input placeholder="Your name" type="text" name="nameReply" class="border border-gray-300 rounded p-1 text-sm my-1">
+                      <input placeholder="Your reply" type="text" name="textReply" class="border border-gray-300 rounded p-1 text-sm my-1">
+                      <button type="submit" class="bg-blue-500 text-white py-1 rounded text-sm hover:bg-blue-600 transition">Send</button>
+                    </form>
+
+                  </details>
                   </details>
 
                 </div>
