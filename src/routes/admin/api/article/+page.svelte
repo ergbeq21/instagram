@@ -11,6 +11,7 @@
 
 <main class="p-15">
 	{#each data.articles as article}
+		
 		<div class="box m-4 p-4 shadow-md transition-all duration-700 hover:scale-101" transition:slide>
 			<p class="font-mono">ID: {article.id}</p>
 			<p class="font-mono">Description: {article.description}</p>
