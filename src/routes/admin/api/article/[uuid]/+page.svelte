@@ -15,6 +15,7 @@
     
 </script>
 
+
 <div class="flex justify-center items-center min-h-screen">
     {#if article}
       <div class="p-4 text-center border rounded shadow w-96">
@@ -36,17 +37,26 @@
           </form>
             
           
-          <div class="bg-blue-100 p-3 mt-4 rounded w-full text-sm">
-            <h2 class="font-medium">All comments</h2>
+          <div class="bg-blue-100 p-4 mt-4 rounded-lg w-full text-sm">
+            <h2 class="font-semibold text-left text-gray-800">All Comments</h2>
             {#each data.comments as comment}
             {#if article.id == comment.article_id}
-                <div class="bg-blue-600 text-white p-2 my-1 rounded">
-                    <p class="font-mono text-xs">From: {comment.name}</p>
-                    <p class="font-mono text-xs">Comment: {comment.text}</p>
+                <div class="bg-blue-600 text-white p-3 my-2 rounded-lg text-left shadow-md">
+                    <p class="font-mono text-xs"><strong>From:</strong> {comment.name}</p>
+                    <p class="font-mono text-xs"><strong>Comment:</strong> {comment.text}</p>
+                    <div class="flex items-center justify-between">
+                      <form action="?/likeComment" method="POST">
+                        <button type="submit" class="text-xs px-1 py-0.4 text-black bg-white border border-gray-300 rounded hover:bg-red-500 hover:text-white transition-all h-5">
+                          Like
+                      </button>
+                      </form>
+                    <p class="font-mono text-[0.6rem] text-right">Likes: 0</p>
+                  </div>
+
                 </div>
             {/if}
             {/each}
-          </div>
+        </div>
           
           <a href="/" class="text-blue-500 text-xs mt-2 ">Go Back</a>
       </div>
