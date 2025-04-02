@@ -10,7 +10,9 @@ export async function load({ locals }) {
 
 	return {
 		comments: rows,
-		replys: replyRows
+		replys: replyRows,
+		user: locals.user
+		
 	};
 }
 export const actions = {

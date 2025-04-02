@@ -13,6 +13,8 @@ export async function load({ locals }) {
 
 	return {
 		articles: rows,
+        user: locals.user
+
 	};
 }
 

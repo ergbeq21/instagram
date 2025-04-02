@@ -1,15 +1,11 @@
-<script>
-	import { onMount } from 'svelte';
-	let { data } = $props();
-	
-	let articles = $state([]);
 
-	onMount(async () => {
-		const res = await fetch('/admin/api/article');
-		articles = await res.json();
-	});
+
+<script>
+
+let { data } = $props();
 
 </script>
+
 
 <!--Header-->
 
@@ -101,78 +97,91 @@
 <!--Header-->
 
 
+
+
+
+
+
 <section>
-  <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-    <header>
-      <h2 class="text-xl font-bold text-gray-900 sm:text-3">Image Collection</h2>
-
-      <p class="mt-4 max-w-md text-gray-500">
-		Ein modernes und interaktives Design, das es Nutzern ermöglicht, Artikel 
-		zu liken, Kommentare zu hinterlassen und Antworten zu sehen 
-      </p>
-    </header>
-
-    <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-		{#each articles as article}
-		<li class="relative">
-			<div class="group block overflow-hidden">
-			  <div class="relative">
+	<div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+	  <header>
+		<h2 class="text-xl font-bold text-gray-900 sm:text-3">Favorites Collection</h2>
+  
+		<p class="mt-4 max-w-md text-gray-500">
+		  Ein modernes und interaktives Design, das es Nutzern ermöglicht, Artikel 
+		  zu liken, Kommentare zu hinterlassen und Antworten zu sehen 
+		</p>
+	  </header>
+  
+	  <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
 
 
-				<img
-				  src={article.image}
-				  alt={article.description}
-				  class="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
-				/>
+{#if data && data.favorites && data.articles && data.user}
+  {#each data.favorites as favorite}
+    {#each data.articles as article}
+      {#if data.user.id == favorite.user_id && favorite.article_id == article.id}
 
 
-				{#if data.user}
-				<form action="?/addFavorites" method="POST">
-					<input type="hidden" name="articleID" value={article.id}>
-					<input type="hidden" name="userID" value={data.user.id}>
-					<button class="absolute top-4 right-4 flex items-center gap-2 bg-teal-600 text-white px-2 py-1 rounded-lg shadow-md hover:bg-green-600 transition cursor-pointer">
-						Add to favorites
-					</button>
-				</form>
-
-				{:else}
+	  <li class="relative">
+		<a href="/admin/api/article/{article.id}" class="group block overflow-hidden">
+		  <div class="relative">
 
 
-					<button class="absolute top-4 right-4 flex items-center gap-2 bg-teal-600 text-white px-2 py-1 rounded-lg shadow-md hover:bg-green-600 transition cursor-pointer">
-						Login to add to favorites
-					</button>
+			<img
+			  src={article.image}
+			  alt={article.description}
+			  class="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
+			/>
 
-				{/if}
+			<form action="?/addFavorites" method="POST">
+				<input type="hidden" name="articleID" value={article.id}>
+				<input type="hidden" name="userID" value={data.user.id}>
+				<button class="absolute top-4 right-4 flex items-center gap-2 bg-teal-600 text-white px-2 py-1 rounded-lg shadow-md hover:bg-green-600 transition cursor-pointer">
+					Add to favorites
+				</button>
+			</form>
 
-
-			  </div>
+		  </div>
+		</a>
+	  
+		<div class="relative bg-white pt-3">
+		  <h3 class="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4">
+			{article.description}
+		  </h3>
+	  
+		  <div class="mt-2">
+			<span class="sr-only">Votes</span>
+	  
+			<div class="flex items-start flex-col">
+			  <span class="tracking-wider text-gray-900 text-xs">Author: {article.author}</span>
+			  <span class="tracking-wider text-gray-900 text-xs">Votes: {article.votes}</span>
 			</div>
-		  
-			<div class="relative bg-white pt-3">
+		  </div>
+		</div>
+	  </li>
 
-			  <a href="/admin/api/article/{article.id}" class=" transition duration-500 text-s text-gray-700 group-hover:underline group-hover:underline-offset-4 hover:underline ">
-				{article.description}
-			  </a>
+	  {/if}
+    {/each}
+  {/each}
 
 
-		  
-			  <div class="mt-0.5">
-				<span class="sr-only">Votes</span>
-		  
-				<div class="flex items-start flex-col">
-				  <span class="tracking-wider text-gray-900 text-[10px]">Author: {article.author}</span>
-				  <span class="tracking-wider text-gray-900 text-[10px]">Votes: {article.votes}</span>
-				</div>
-			  </div>
-			</div>
-		  </li>
-		  
-	  {/each}
-    </ul>
-  </div>
-</section>
+
+{:else}
+  <p>No favorites found.</p>
+{/if}
 
 
 
 
- 
+
+
+
+	  </ul>
+	</div>
+  </section>
+
+
+
+
+
+
