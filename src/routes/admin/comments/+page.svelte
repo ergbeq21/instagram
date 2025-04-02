@@ -6,7 +6,6 @@
 
 <div class="flex items-center justify-center flex-col p-6">
 <h1 class="font-mono text-3xl">This is the comment section</h1>
-<a href="/admin/api/article" class="text-x text-blue-600">Go back</a>
 </div>
 <main class="p-15">
 	{#each data.comments as comment}
@@ -28,8 +27,9 @@
 
 			
 			<details class="cursor-pointer pl-5">
-				{#each data.replies as reply }
 				<summary>See all replies for this comment</summary>
+				{#each data.replies as reply }
+				
 				  <p class="font-mono text-xs">ID: {reply.id}</p>
 			      <p class="font-mono text-xs">NAME: {reply.name}</p>
 			      <p class="font-mono text-xs">REPLY: {reply.text}</p>

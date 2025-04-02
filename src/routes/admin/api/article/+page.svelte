@@ -5,8 +5,6 @@
 <div class="flex flex-col items-center justify-center">
 	<h1 class="p-10 text-center text-5xl">Admin page</h1>
 	<a href="/admin/api/article/new" class="text-2xl">Create a new article</a>
-    <a href="/admin/comments" class="text-2xl">See comment section</a>
-	<a href="/" class="text-x text-blue-600">Go back</a>
 </div>
 
 <main class="p-15">
