@@ -3,5 +3,3 @@
 </script>
 
 {@render children()}
-
-

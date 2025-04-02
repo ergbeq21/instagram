@@ -36,10 +36,6 @@ export let login = async (email, password) => {
 	return token;
 };
 
-
-
-
-
 export let register = async (email, username, password) => {
 	let connection = await createConnection();
 	let hashedPassword = await hashPassword(password); // Check if email is already in use
@@ -78,4 +74,3 @@ export let register = async (email, username, password) => {
 let hashPassword = async (password) => {
 	return await bcrypt.hash(password, 12);
 };
-

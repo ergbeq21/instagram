@@ -13,29 +13,29 @@ export async function load({ locals }) {
 
 	return {
 		articles: rows,
-        user: locals.user
-
+		user: locals.user
 	};
 }
 
-
 export const actions = {
-    deleteArticle: async ({ request }) => {
-        const formData = await request.formData();
-        const id = formData.get('id');
-        const connection = await createConnection();
-        const [comments] = await connection.execute('select id from comments where article_id = ?', [id]);
-        
+	deleteArticle: async ({ request }) => {
+		const formData = await request.formData();
+		const id = formData.get('id');
+		const connection = await createConnection();
+		const [comments] = await connection.execute('select id from comments where article_id = ?', [
+			id
+		]);
 
-        if (comments.length > 0) {
-            const commentIds = comments.map(comment => comment.id);
-            const placeholders = commentIds.map(() => '?').join(',');
-            await connection.execute(`delete from reply where comment_id IN (${placeholders})`, 
-                commentIds
-            );
-            await connection.execute('delete from comments where article_id = ?', [id]);
-        }
+		if (comments.length > 0) {
+			const commentIds = comments.map((comment) => comment.id);
+			const placeholders = commentIds.map(() => '?').join(',');
+			await connection.execute(
+				`delete from reply where comment_id IN (${placeholders})`,
+				commentIds
+			);
+			await connection.execute('delete from comments where article_id = ?', [id]);
+		}
 
-        await connection.execute('delete from articles where id = ?', [id]);
-    }
+		await connection.execute('delete from articles where id = ?', [id]);
+	}
 };
