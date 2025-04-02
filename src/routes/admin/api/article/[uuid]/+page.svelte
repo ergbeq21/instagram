@@ -69,6 +69,7 @@
                               Like
                             </button>
                           </form>
+                          
                           <p class="font-mono text-[0.6rem] text-right">Likes: {reply.likes}</p>
                         </div>
                       </div>
@@ -81,6 +82,7 @@
                       <input placeholder="Your reply" type="text" name="textReply" class="border border-gray-300 rounded p-1 text-sm my-1">
                       <button type="submit" class="bg-blue-500 text-white py-1 rounded text-sm hover:bg-blue-600 transition">Send</button>
                     </form>
+
 
                   </details>
 

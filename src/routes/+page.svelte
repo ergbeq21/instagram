@@ -6,8 +6,8 @@
 		const res = await fetch('/admin/api/article');
 		articles = await res.json();
 	});
-</script>
 
+</script>
 
 
 <section>

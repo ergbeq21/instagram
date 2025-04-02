@@ -28,7 +28,9 @@
 			
 			<details class="cursor-pointer pl-5">
 				<summary>See all replies for this comment</summary>
+					
 				{#each data.replies as reply }
+				{#if reply.comment_id == comment.id}
 				
 				  <p class="font-mono text-xs">ID: {reply.id}</p>
 			      <p class="font-mono text-xs">NAME: {reply.name}</p>
@@ -43,7 +45,9 @@
 					Delete
 				</button>
 			</form>
+			{/if}
 			{/each}
+
 			</details>
 				
 			
