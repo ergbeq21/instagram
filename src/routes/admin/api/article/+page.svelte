@@ -40,7 +40,7 @@
 			</li>
 
 			<li>
-			  <a class="text-gray-500 transition hover:text-gray-500/75" href="/admin/api/article"> Admin </a>
+			  <a class="text-gray-500 transition hover:text-gray-500/75" href="/admin/api/article"> Articles </a>
 			</li>
 			
 		  </ul>
@@ -96,7 +96,7 @@
 
 
 <div class="flex flex-col items-center justify-center">
-	<h1 class="p-10 text-center text-5xl">Admin page</h1>
+	<h1 class="p-5 text-center text-5xl">Admin page</h1>
 	<a href="/admin/api/article/new" class="text-2xl">Create a new article</a>
 </div>
 

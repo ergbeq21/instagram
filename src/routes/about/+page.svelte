@@ -42,7 +42,7 @@
                 </li>
     
                 <li>
-                  <a class="text-gray-500 transition hover:text-gray-500/75" href="/admin/api/article"> Admin </a>
+                  <a class="text-gray-500 transition hover:text-gray-500/75" href="/admin/api/article"> Articles </a>
                 </li>
                 
               </ul>

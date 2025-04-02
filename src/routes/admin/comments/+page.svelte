@@ -40,7 +40,7 @@
 			</li>
 
 			<li>
-			  <a class="text-gray-500 transition hover:text-gray-500/75" href="/admin/api/article"> Admin </a>
+			  <a class="text-gray-500 transition hover:text-gray-500/75" href="/admin/api/article"> Articles </a>
 			</li>
 			
 		  </ul>
@@ -94,9 +94,13 @@
 <!--Header-->
 
 
-<div class="flex items-center justify-center flex-col p-6">
-<h1 class="font-mono text-3xl">This is the comment section</h1>
-</div>
+
+
+	<div class="flex flex-col items-center justify-center">
+		<h1 class="p-5 text-center text-5xl">Admin page</h1>
+		<p class="text-2xl">This is the comment section</p>
+	</div>
+
 <main class="p-15">
 	{#each data.comments as comment}
 		<div class="box m-4 p-4 shadow-md transition-all duration-700 hover:scale-101" transition:slide>
