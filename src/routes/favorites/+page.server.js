@@ -13,3 +13,16 @@ export async function load({ locals }) {
         favorites: favouritesRows
     };
 }
+
+
+export const actions = {
+	deleteFavorites: async ({ request }) => {
+		let formData = await request.formData();
+		const connection = await createConnection();
+
+		const favID = formData.get('favID');
+        await connection.execute('delete from favorites where id = ? ',[favID]);
+	}
+};
+
+

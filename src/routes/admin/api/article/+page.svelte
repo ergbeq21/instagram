@@ -102,14 +102,17 @@
 
 <main class="p-15">
 	{#each data.articles as article}
-		
-		<div class="box m-4 p-4 shadow-md transition-all duration-700 hover:scale-101" transition:slide>
+	<div class="box m-4 p-4 shadow-md transition-all duration-700 hover:scale-101 flex items-start space-x-4">
+
+		<img src={article.image} alt="" class="w-50 h-50 object-cover rounded-md">
+	
+		<div>
 			<p class="font-mono">ID: {article.id}</p>
 			<p class="font-mono">Description: {article.description}</p>
 			<p class="font-mono">Image: {article.image}</p>
 			<p class="font-mono">Author: {article.author}</p>
 			<p class="font-mono">Votes: {article.votes}</p>
-
+	
 			<form action="?/deleteArticle" method="POST">
 				<input type="hidden" name="id" value={article.id} />
 				<button
@@ -120,5 +123,8 @@
 				</button>
 			</form>
 		</div>
+	</div>
+	
+
 	{/each}
 </main>

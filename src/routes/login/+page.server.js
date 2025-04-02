@@ -1,5 +1,15 @@
 import { login } from '$lib/db/auth';
 import { redirect } from '@sveltejs/kit';
+import { createConnection } from '$lib/db/mysql';
+
+
+export async function load({ locals }) {
+	let connection = await createConnection();
+
+	return {
+		user: locals.user
+	};
+}
 
 export const actions = {
 	login: async ({ request, cookies }) => {

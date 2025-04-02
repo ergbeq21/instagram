@@ -123,7 +123,7 @@ let { data } = $props();
 
 
 	  <li class="relative">
-		<a href="/admin/api/article/{article.id}" class="group block overflow-hidden">
+		<div class="group block overflow-hidden">
 		  <div class="relative">
 
 
@@ -133,21 +133,22 @@ let { data } = $props();
 			  class="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
 			/>
 
-			<form action="?/addFavorites" method="POST">
-				<input type="hidden" name="articleID" value={article.id}>
-				<input type="hidden" name="userID" value={data.user.id}>
-				<button class="absolute top-4 right-4 flex items-center gap-2 bg-teal-600 text-white px-2 py-1 rounded-lg shadow-md hover:bg-green-600 transition cursor-pointer">
-					Add to favorites
+			<form action="?/deleteFavorites" method="POST">
+				<input type="hidden" name="favID" value={favorite.id}>
+				<button class="absolute top-4 right-4 flex items-center gap-2 bg-red-400 text-white px-2 py-1 rounded-lg shadow-md hover:bg-red-600 transition cursor-pointer">
+					Delete
 				</button>
 			</form>
 
 		  </div>
-		</a>
+		</div>
+
 	  
 		<div class="relative bg-white pt-3">
-		  <h3 class="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4">
-			{article.description}
-		  </h3>
+		  
+			<a href="/admin/api/article/{article.id}" class=" transition duration-500 text-s text-gray-700 group-hover:underline group-hover:underline-offset-4 hover:underline ">
+				{article.description}
+			  </a>
 	  
 		  <div class="mt-2">
 			<span class="sr-only">Votes</span>
@@ -167,7 +168,7 @@ let { data } = $props();
 
 
 {:else}
-  <p>No favorites found.</p>
+  <p class="text-xs text-gray-500">You need a account to add articles to favorites</p>
 {/if}
 
 
