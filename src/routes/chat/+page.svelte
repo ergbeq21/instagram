@@ -119,6 +119,7 @@
 
 <!--Header-->
 
+
 <main class="flex justify-center items-center min-h-screen bg-gray-100 flex-col gap-2">
     <div class="p-10 bg-white shadow-lg rounded-lg max-w-md w-full">
         <form action="?/searchUser" class="flex justify-between items-center mb-4" method="POST" use:enhance>
@@ -140,9 +141,8 @@
             <details class="cursor-pointer">
                 <summary>See your messages with {form.userInfo.username}</summary>
                 {#each data.messages as message}
-                    {#if message.user_id == form.userInfo.id && message.user2_id == data.user.id}
-                        <p>You: {message.text}</p>
-                        <p>{form.userInfo.username}: {message.text}</p>
+                    {#if (message.user_id === form.userInfo.id && message.user2_id === data.user.id) || (message.user_id === data.user.id && message.user2_id === form.userInfo.id)}
+                        <p>{message.user_id === data.user.id ? 'You' : form.userInfo.username}: {message.text}</p>
                     {/if}
                 {/each}
             </details>
@@ -152,7 +152,7 @@
     <div class="ml-10">
         {#if form && form.userInfo}
             <form action="?/sendMessage" method="POST" class="bg-white shadow-lg rounded-lg p-6 w-80" use:enhance>
-                <p class="font-semibold text-sm mb-2">Send Message to {form.userInfo.username} ID: {form.userInfo.id}</p>
+                <p class="font-semibold text-sm mb-2">Send Message to {form.userInfo.username} (ID: {form.userInfo.id})</p>
                 <input type="hidden" name="userID" value={form.userInfo.id}>
                 <input type="hidden" name="user2ID" value={data.user.id}>
                 <input type="text" name="text" class="w-full h-10 px-4 border rounded-lg mb-3 text-sm" placeholder="Write a message...">
