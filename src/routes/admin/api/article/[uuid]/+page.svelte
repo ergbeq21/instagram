@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { get } from 'svelte/store';
+	import { enhance } from '$app/forms';
 	let { data, form } = $props();
 
 	let article = $state();
@@ -115,7 +116,7 @@
 				>
 			</form>
 
-			<form action="?/writeComment" method="POST" class="flex flex-col p-4">
+			<form action="?/writeComment" method="POST" class="flex flex-col p-4" use:enhance>
 				<h2 class="text-sm text-blue-600">Send a comment</h2>
 				<input type="hidden" value={article.id} name="articleID" />
 				<input
@@ -145,7 +146,7 @@
 							<p class="font-mono text-xs"><strong>From:</strong> {comment.name}</p>
 							<p class="font-mono text-xs"><strong>Comment:</strong> {comment.text}</p>
 							<div class="flex items-center justify-between">
-								<form action="?/likeComment" method="POST">
+								<form action="?/likeComment" method="POST" use:enhance>
 									<input type="hidden" name="likeId" value={comment.id} />
 									<button
 										type="submit"
@@ -165,7 +166,7 @@
 											<p class="font-mono text-xs"><strong>From:</strong> {reply.name}</p>
 											<p class="font-mono text-xs"><strong>Reply:</strong> {reply.text}</p>
 											<div class="flex items-center justify-between">
-												<form action="?/likeReply" method="POST">
+												<form action="?/likeReply" method="POST" use:enhance>
 													<input type="hidden" name="replylikeId" value={reply.id} />
 													<button
 														type="submit"
@@ -181,7 +182,7 @@
 									{/if}
 								{/each}
 
-								<form action="?/writeReply" method="POST" class="flex flex-col p-4 text-black">
+								<form action="?/writeReply" method="POST" class="flex flex-col p-4 text-black" use:enhance>
 									<input type="hidden" value={comment.id} name="commentID" />
 									<input
 										placeholder="Your name"

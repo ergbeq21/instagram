@@ -126,27 +126,56 @@
 									</div>
 								</div>
 
+								<!--INfo about the article-->
+
 								<div class="relative bg-white pt-3">
 									<a
 										href="/admin/api/article/{article.id}"
-										class=" text-s text-gray-700 transition duration-500 group-hover:underline group-hover:underline-offset-4 hover:underline"
+										class=" text-s font-light text-gray-700 transition duration-500 group-hover:underline group-hover:underline-offset-4 hover:text-teal-500 hover:underline"
 									>
 										{article.description}
 									</a>
-
-									<div class="mt-2">
-										<span class="sr-only">Votes</span>
-
-										<div class="flex flex-col items-start">
-											<span class="text-xs tracking-wider text-gray-900"
-												>Author: {article.author}</span
+			
+									<div class="mt-3">
+										<div class="flex items-center space-x-4 text-xs">
+											<span class="inline-flex items-center text-gray-600">
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													class="mr-1 h-3.5 w-3.5"
+													viewBox="0 0 20 20"
+													fill="currentColor"
+												>
+													<path
+														fill-rule="evenodd"
+														d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+														clip-rule="evenodd"
+													/>
+												</svg>
+												{article.author}
+											</span>
+											<form action="?/upVote" method="POST">
+											<input type="hidden" name="voteId" value={article.id} />
+											<button
+												class="inline-flex items-center rounded text-gray-600 transition-colors duration-100 hover:text-blue-500"
 											>
-											<span class="text-xs tracking-wider text-gray-900"
-												>Votes: {article.votes}</span
-											>
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													class="mr-1 h-3.5 w-3.5"
+													viewBox="0 0 20 20"
+													fill="currentColor"
+												>
+													<path
+														d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z"
+													/>
+												</svg>
+												{article.votes}
+											</button>
+										</form>
 										</div>
 									</div>
 								</div>
+								
+								<!--INfo about the article-->
 							</li>
 						{/if}
 					{/each}

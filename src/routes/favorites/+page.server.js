@@ -20,5 +20,13 @@ export const actions = {
 
 		const favID = formData.get('favID');
 		await connection.execute('delete from favorites where id = ? ', [favID]);
+	},
+    upVote: async ({ request }) => {
+		const formData = await request.formData();
+		const voteId = await formData.get('voteId');
+		console.log(voteId);
+
+		const connection = await createConnection();
+		await connection.execute('UPDATE articles SET votes = votes + 1 WHERE id = ?', [voteId]);
 	}
 };

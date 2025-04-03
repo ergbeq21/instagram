@@ -1,5 +1,7 @@
 <script>
+	import { enhance } from "$app/forms";
 	let { data, form } = $props();
+
 </script>
 
 <!--Header-->
@@ -102,7 +104,7 @@
 			<p class="font-mono">NAME: {comment.name}</p>
 			<p class="font-mono">COMMENT: {comment.text}</p>
 
-			<form action="?/deleteComment" method="POST">
+			<form action="?/deleteComment" method="POST" >
 				<input type="hidden" name="id" value={comment.id} />
 				<button
 					type="submit"

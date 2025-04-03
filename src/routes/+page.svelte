@@ -1,4 +1,5 @@
 <script>
+	import { enhance } from '$app/forms';
 	import { onMount } from 'svelte';
 	let { data } = $props();
 
@@ -125,7 +126,7 @@
 							{#if data.user}
 								{#if data.favorites.some((fav) => fav.article_id == article.id && fav.user_id == data.user.id)}
 									{#each data.favorites.filter((fav) => fav.article_id == article.id && fav.user_id == data.user.id) as favorite}
-										<form action="?/deleteFavorites" method="POST">
+										<form action="?/deleteFavorites" method="POST" use:enhance>
 											<input type="hidden" name="favID" value={favorite.id} />
 											<button
 												class="absolute top-2 right-2 flex cursor-pointer items-center gap-1 rounded bg-red-600 px-2 py-1 text-xs text-white shadow-md transition duration-500 hover:bg-red-500"
@@ -135,7 +136,7 @@
 										</form>
 									{/each}
 								{:else}
-									<form action="?/addFavorites" method="POST">
+									<form action="?/addFavorites" method="POST" use:enhance>
 										<input type="hidden" name="articleID" value={article.id} />
 										<input type="hidden" name="userID" value={data.user.id} />
 										<button
