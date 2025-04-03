@@ -29,6 +29,12 @@
 						</a>
 					</li>
 
+                    <li>
+						<a class="text-gray-500 transition hover:text-gray-500/75" href="/chat">
+							Chat
+						</a>
+					</li>
+
 					<li>
 						<a class="text-gray-500 transition hover:text-gray-500/75" href="/about"> About </a>
 					</li>

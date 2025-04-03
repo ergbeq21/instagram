@@ -1,5 +1,5 @@
 <script>
-
+    import { enhance } from "$app/forms";
     let { data, form } = $props();
 </script>
 
@@ -27,6 +27,11 @@
 					<li>
 						<a class="text-gray-500 transition hover:text-gray-500/75" href="/favorites">
 							Favorites
+						</a>
+					</li>
+                    <li>
+						<a class="text-gray-500 transition hover:text-gray-500/75" href="/chat">
+							Chat
 						</a>
 					</li>
 
@@ -112,23 +117,32 @@
 
 <!--Header-->
 
-<main class="flex justify-between items-center flex-row">
-    <div class="p-10">
-        <form action="?/searchUser" class="flex justify-between items-center" method="POST">
-            <input type="text" name="username" placeholder="Search username" class="h-10">
-            <button type="submit" class="bg-blue-500 h-10">Search</button>
+<main class="flex justify-center items-center min-h-screen bg-gray-100 flex-col gap-2">
+    <div class="p-10 bg-white shadow-lg rounded-lg max-w-md w-full">
+        <form action="?/searchUser" class="flex justify-between items-center mb-4" method="POST" use:enhance>
+            <input type="text" name="username" placeholder="Search username" class="h-10 px-4 border rounded-lg w-full text-sm">
+            <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded-lg ml-2 hover:bg-blue-600">Search</button>
         </form>
 
         {#if form && form.userInfo}
-            <p>Username: {form.userInfo.username}</p>
-            <p>Email: {form.userInfo.email}</p>
+            <p class="text-l font-medium text-green-600">User found</p>
+            <p class="text-lg font-medium">Username: {form.userInfo.username}</p>
+            <p class="text-sm text-gray-600">Email: {form.userInfo.email}</p>
         {:else if form && form.error}
-            <p>{form.error}</p>
+            <p class="text-red-400 text-xs pl-1">{form.error}</p>
         {:else}
-            <p></p>
+            <p class="text-gray-500 text-sm">Please enter a username to search.</p>
         {/if}
     </div>
-    <div>
-
+    
+    <div class="ml-10">
+        {#if form && form.userInfo}
+            <form action="?/sendMessage" method="POST" class="bg-white shadow-lg rounded-lg p-6 w-80">
+                <p class="font-semibold text-sm mb-2">Send Message to {form.userInfo.username}</p>
+                <input type="text" class="w-full h-10 px-4 border rounded-lg mb-3 text-sm" placeholder="Write a message...">
+                <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600">Send message</button>
+            </form>
+        {/if}
     </div>
 </main>
+
