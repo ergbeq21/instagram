@@ -35,30 +35,18 @@
 						<a class="text-gray-500 transition hover:text-gray-500/75" href="/about"> About </a>
 					</li>
 
-					<li>
-						<a class="text-gray-500 transition hover:text-gray-500/75" href="/admin/users">
-							Users
-						</a>
-					</li>
-
-					<li>
-						<a class="text-gray-500 transition hover:text-gray-500/75" href="/admin/comments">
-							Comments
-						</a>
-					</li>
-
-					<li>
-						<a class="text-gray-500 transition hover:text-gray-500/75" href="/admin/api/article">
-							Articles
-						</a>
+					<li class="relative group">
+						<button class=" text-gray-500  px-4 py-2 rounded transition hover:text-gray-500/75">Admin</button>
+						<ul class="absolute left-0 mt-0.1 w-40 rounded shadow-lg hidden group-hover:block">
+							<li><a href="/admin/users" class=" text-gray-500  block px-4 py-2 transition hover:text-gray-500/75 ">Users</a></li>
+							<li><a href="/admin/api/article" class=" text-gray-500  block px-4 py-2 transition hover:text-gray-500/75 ">Articles</a></li>
+							<li><a href="/admin/comments" class=" text-gray-500  block px-4 py-2 transition hover:text-gray-500/75">Comments</a></li>
+						</ul>
 					</li>
 				</ul>
 			</nav>
 
 			{#if data.user}
-				<a class="text-black-600 pr-14 transition hover:text-gray-500/75" href="/"
-					>Welcome back {data.user.username}
-				</a>
 
 				<div class="flex items-center justify-center">
 					<form action="/logout?/logout" method="POST" class="p-1">
