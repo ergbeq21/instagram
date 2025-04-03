@@ -12,12 +12,11 @@ export async function load({ locals }) {
 
     let [messRows] = await  connection.execute('select * from message;');
 
-
-
     
     return {
         user: locals.user,
-        messages: messRows
+        messages: messRows,
+
     };
 }
 

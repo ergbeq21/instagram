@@ -135,6 +135,29 @@
         {:else}
             <p class="text-gray-500 text-sm">Please enter a username to search.</p>
         {/if}
+
+
+
+        {#if form && form.userInfo}
+
+        <details class="cursor-pointer">
+        <summary>See your messages with {form.userInfo.username}
+        </summary>
+
+
+        {#each data.messages as message}
+
+        {#if message.user_id == form.userInfo.id}
+        <p>{message.text}</p>
+        {/if}
+
+        {/each}
+    
+        </details>
+        {/if}
+
+
+    
     </div>
     
     <div class="ml-10">
@@ -149,21 +172,7 @@
         {/if}
     </div>
 
-    {#if form && form.userInfo}
-
-    <details class="cursor-pointer">
-        <summary>See your messages with others
-        </summary>
-
-
-        {#each data.messages as message}
-        {#if message.user_id == form.userInfo.id}
-        <p>{message.text}</p>
-        {/if}
-        {/each}
     
-    </details>
-    {/if}
     
 </main>
 
