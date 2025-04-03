@@ -120,6 +120,7 @@
 <!--Header-->
 
 
+
 <main class="flex justify-center items-center min-h-screen bg-gray-100 flex-col gap-2">
     <div class="p-10 bg-white shadow-lg rounded-lg max-w-md w-full">
         <form action="?/searchUser" class="flex justify-between items-center mb-4" method="POST" use:enhance>
