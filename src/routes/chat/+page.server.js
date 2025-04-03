@@ -1,9 +1,22 @@
 import { createConnection } from '$lib/db/mysql';
 import { error } from '@sveltejs/kit';
+import { redirect } from '$app/server';
 
 export async function load({ locals }) {
+    if (!locals.user) {
+		redirect(302, '/login');
+	}
+
+	let connection = await createConnection();
+
+    let [messRows] = await  connection.execute('select * from message;');
+
+
+
+    
     return {
-        user: locals.user
+        user: locals.user,
+        messages: messRows
     };
 }
 
@@ -22,7 +35,7 @@ export const actions = {
         const connection = await createConnection();
 
             let [rows] = await connection.execute(
-                'SELECT username, email FROM users WHERE username = ?',
+                'SELECT id, username, email FROM users WHERE username = ?',
                 [username]
             );
 
@@ -37,5 +50,22 @@ export const actions = {
                 userInfo: rows[0]
             };
         
-    }
+    },
+    sendMessage: async ({ request }) => {
+        const formData = await request.formData();
+        const userID = formData.get('userID');
+        const text = formData.get('text');
+        const user2ID = formData.get('user2ID');
+    
+        const connection = await createConnection();
+        try {
+            await connection.execute(
+                'INSERT INTO message (text, user_id, user2_id) VALUES (?, ?,?)',
+                [text, userID,user2ID]
+            );
+        } catch (error) {
+            console.error('Database query error:', error);
+            throw error;
+        } 
+    } 
 };

@@ -1,6 +1,8 @@
 <script>
     import { enhance } from "$app/forms";
     let { data, form } = $props();
+
+    console.log(data.messages);
 </script>
 
 <!--Header-->
@@ -137,12 +139,31 @@
     
     <div class="ml-10">
         {#if form && form.userInfo}
-            <form action="?/sendMessage" method="POST" class="bg-white shadow-lg rounded-lg p-6 w-80">
-                <p class="font-semibold text-sm mb-2">Send Message to {form.userInfo.username}</p>
-                <input type="text" class="w-full h-10 px-4 border rounded-lg mb-3 text-sm" placeholder="Write a message...">
+            <form action="?/sendMessage" method="POST" class="bg-white shadow-lg rounded-lg p-6 w-80" use:enhance>
+                <p class="font-semibold text-sm mb-2">Send Message to {form.userInfo.username}      ID: {form.userInfo.id}</p>
+                <input type="hidden" name="userID" value={form.userInfo.id}>
+                <input type="hidden" name="user2ID" value={data.user.id}>
+                <input type="text" name="text" class="w-full h-10 px-4 border rounded-lg mb-3 text-sm" placeholder="Write a message...">
                 <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600">Send message</button>
             </form>
         {/if}
     </div>
+
+    {#if form && form.userInfo}
+
+    <details class="cursor-pointer">
+        <summary>See your messages with others
+        </summary>
+
+
+        {#each data.messages as message}
+        {#if message.user_id == form.userInfo.id}
+        <p>{message.text}</p>
+        {/if}
+        {/each}
+    
+    </details>
+    {/if}
+    
 </main>
 
