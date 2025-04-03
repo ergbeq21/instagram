@@ -43,6 +43,12 @@
 					</li>
 
 					<li>
+						<a class="text-gray-500 transition hover:text-gray-500/75" href="/admin/users">
+							Users
+						</a>
+					</li>
+
+					<li>
 						<a class="text-gray-500 transition hover:text-gray-500/75" href="/admin/comments">
 							Comments
 						</a>

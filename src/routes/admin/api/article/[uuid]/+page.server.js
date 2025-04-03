@@ -53,7 +53,7 @@ export const actions = {
 		const likeId = await formData.get('likeId');
 
 		const connection = await createConnection();
-		await connection.execute('UPDATE comments SET likes = likes + 1 where id = ?', [likeId]);
+		await connection.execute('UPDATE comments SET likes = likes + 1 WHERE id = ?', [likeId]);
 	},
 	likeReply: async ({ request }) => {
 		const formData = await request.formData();

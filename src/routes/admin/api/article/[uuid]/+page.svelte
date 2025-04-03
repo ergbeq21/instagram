@@ -46,6 +46,12 @@
 					</li>
 
 					<li>
+						<a class="text-gray-500 transition hover:text-gray-500/75" href="/admin/users">
+							Users
+						</a>
+					</li>
+
+					<li>
 						<a class="text-gray-500 transition hover:text-gray-500/75" href="/admin/comments">
 							Comments
 						</a>
@@ -108,20 +114,37 @@
 			<img src={article.image} alt={article.description} class="h-auto w-full rounded" />
 			<h1 class="mt-2 text-lg font-medium">{article.description}</h1>
 			<p class="text-xs text-gray-500">By {article.author}</p>
-			<p class="text-xs text-gray-500">Votes: {article.votes}</p>
+			<div>
+			
 			<form action="?/upVote" method="POST">
 				<input type="hidden" name="voteId" value={article.id} />
 				<button type="submit" class="mt-2 rounded bg-blue-500 px-3 py-1 text-sm text-white"
 					>Upvote</button
 				>
 			</form>
+			<p class="text-xs text-gray-500">Votes: {article.votes}</p>
+		    </div>
 
 			<form action="?/writeComment" method="POST" class="flex flex-col p-4" use:enhance>
 				<h2 class="text-sm text-blue-600">Send a comment</h2>
 				<input type="hidden" value={article.id} name="articleID" />
+				{#if data.user}
 				<input
-					placeholder="Your name"
+					type="hidden"
+					name="name"
+					value={data.user.username}
+
+					class="my-1 rounded border border-gray-300 p-1 text-sm"
+				/>
+				<input
+					placeholder="Your comment"
 					type="text"
+					name="text"
+					class="my-1 rounded border border-gray-300 p-1 text-sm"
+				/>
+				{:else}
+				<input
+				    placeholder="Write you name"
 					name="name"
 					class="my-1 rounded border border-gray-300 p-1 text-sm"
 				/>
@@ -131,6 +154,7 @@
 					name="text"
 					class="my-1 rounded border border-gray-300 p-1 text-sm"
 				/>
+				{/if}
 				<button
 					type="submit"
 					class="rounded bg-blue-500 py-1 text-sm text-white transition hover:bg-blue-600"
@@ -184,6 +208,20 @@
 
 								<form action="?/writeReply" method="POST" class="flex flex-col p-4 text-black" use:enhance>
 									<input type="hidden" value={comment.id} name="commentID" />
+									{#if data.user}
+									<input
+										type="hidden"
+										name="nameReply",
+										value={data.user.username}
+										class="my-1 rounded border border-gray-300 p-1 text-sm"
+									/>
+									<input
+										placeholder="Reply to comment"
+										type="text"
+										name="textReply"
+										class="my-1 rounded border border-gray-300 p-1 text-sm"
+									/>
+									{:else}
 									<input
 										placeholder="Your name"
 										type="text"
@@ -191,11 +229,12 @@
 										class="my-1 rounded border border-gray-300 p-1 text-sm"
 									/>
 									<input
-										placeholder="Your reply"
+										placeholder="Reply to comment"
 										type="text"
 										name="textReply"
 										class="my-1 rounded border border-gray-300 p-1 text-sm"
 									/>
+									{/if}
 									<button
 										type="submit"
 										class="rounded bg-blue-500 py-1 text-sm text-white transition hover:bg-blue-600"
