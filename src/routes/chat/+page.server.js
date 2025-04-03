@@ -1,6 +1,7 @@
 import { createConnection } from '$lib/db/mysql';
 import { error } from '@sveltejs/kit';
-import { redirect } from '$app/server';
+import { redirect } from '@sveltejs/kit';
+
 
 export async function load({ locals }) {
     if (!locals.user) {
