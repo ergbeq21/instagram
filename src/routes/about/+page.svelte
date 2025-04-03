@@ -90,4 +90,28 @@
 
 <!--Header-->
 
-<p class="p-50 text-center">This is the about page</p>
+
+<main class="bg-gray-100 flex items-center justify-center min-h-screen p-5">
+    <div class="bg-white p-10 rounded-lg shadow-lg max-w-2xl w-full text-center">
+        <h1 class="text-4xl font-bold text-gray-800 mb-6">About InstaClone</h1>
+        
+        <section class="mb-6">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-2">What is InstaClone?</h2>
+            <p class="text-gray-600">InstaClone is a social media clone project inspired by Instagram. It was developed as a learning experience to explore web development, front-end and back-end technologies, and the functionality of modern social platforms.</p>
+        </section>
+        
+        <section class="mb-6">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-2">Features</h2>
+            <ul class="text-gray-600 list-disc list-inside text-left mx-auto inline-block">
+                <li>Like and comment on posts</li>
+                <li>User authentication and security</li>
+                <li>Responsive and user-friendly interface</li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2 class="text-2xl font-semibold text-gray-700 mb-2">Future Development</h2>
+            <p class="text-gray-600">InstaClone is an evolving project. Future updates will include advanced features such as direct messaging, stories, and enhanced performance optimizations to create a better user experience.</p>
+        </section>
+    </div>
+</main>
