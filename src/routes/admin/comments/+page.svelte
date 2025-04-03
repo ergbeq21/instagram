@@ -1,7 +1,6 @@
 <script>
-	import { enhance } from "$app/forms";
+	import { enhance } from '$app/forms';
 	let { data, form } = $props();
-
 </script>
 
 <!--Header-->
@@ -35,49 +34,76 @@
 						<a class="text-gray-500 transition hover:text-gray-500/75" href="/about"> About </a>
 					</li>
 
-					<li class="relative group">
-						<button class=" text-gray-500  px-4 py-2 rounded transition hover:text-gray-500/75">Admin</button>
-						<ul class="absolute left-0 mt-0.1 w-40 rounded shadow-lg hidden group-hover:block">
-							<li><a href="/admin/users" class=" text-gray-500  block px-4 py-2 transition hover:text-gray-500/75 ">Users</a></li>
-							<li><a href="/admin/api/article" class=" text-gray-500  block px-4 py-2 transition hover:text-gray-500/75 ">Articles</a></li>
-							<li><a href="/admin/comments" class=" text-gray-500  block px-4 py-2 transition hover:text-gray-500/75">Comments</a></li>
+					<li class="group relative">
+						<button class=" rounded px-4 py-2 text-gray-500 transition hover:text-gray-500/75"
+							>Admin</button
+						>
+						<ul class="mt-0.1 absolute left-0 hidden w-40 rounded shadow-lg group-hover:block">
+							<li>
+								<a
+									href="/admin/users"
+									class=" block px-4 py-2 text-gray-500 transition hover:text-gray-500/75">Users</a
+								>
+							</li>
+							<li>
+								<a
+									href="/admin/api/article"
+									class=" block px-4 py-2 text-gray-500 transition hover:text-gray-500/75"
+									>Articles</a
+								>
+							</li>
+							<li>
+								<a
+									href="/admin/comments"
+									class=" block px-4 py-2 text-gray-500 transition hover:text-gray-500/75"
+									>Comments</a
+								>
+							</li>
 						</ul>
 					</li>
 				</ul>
 			</nav>
 
 			{#if data.user}
-
 				<div class="flex items-center justify-center">
 					<form action="/logout?/logout" method="POST" class="p-1">
 						<button
-							class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
+							class="block cursor-pointer rounded-md bg-teal-500 px-1.5 py-1.5 text-xs font-medium text-white transition hover:bg-teal-700"
 							>Logout</button
 						>
 					</form>
-					<form action="/logout?/deleteAccount" method="POST" class="p-1">
-						<button
-							class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
-							>Delete Account</button
-						>
-					</form>
+
+					<details
+						class="block cursor-pointer rounded-md bg-teal-500 px-1.5 py-1.5 text-xs font-medium text-white transition hover:bg-teal-700"
+					>
+						<summary class="cursor-pointer list-none">Delete account</summary>
+
+						<div class="mt-2">
+							<form action="/logout?/deleteAccount" method="POST">
+								<button
+									type="submit"
+									class=" text-white-400 w-full cursor-pointer rounded-md bg-red-500 px-5 py-2 text-xs font-medium transition duration-100 hover:bg-red-700"
+								>
+									Delete
+								</button>
+							</form>
+						</div>
+					</details>
 				</div>
 			{:else}
-				<div class="flex items-center gap-4">
-					<div class="sm:flex sm:gap-4">
-						<a
-							class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
-							href="/login"
-						>
-							Login
-						</a>
-						<a
-							class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
-							href="/register"
-						>
-							Register
-						</a>
-					</div>
+				<div class="flex items-center justify-center gap-1">
+					<a
+						class="block cursor-pointer rounded-md bg-teal-500 p-1 px-1.5 py-1.5 text-xs font-medium text-white transition hover:bg-teal-700"
+						href="/login"
+					>
+						Login
+					</a>
+					<a
+						class="block cursor-pointer rounded-md bg-teal-500 px-1.5 py-1.5 text-xs font-medium text-white transition hover:bg-teal-700"
+						href="/register"
+					>
+						Register
+					</a>
 				</div>
 			{/if}
 		</div>
@@ -98,7 +124,7 @@
 			<p class="font-mono">NAME: {comment.name}</p>
 			<p class="font-mono">COMMENT: {comment.text}</p>
 
-			<form action="?/deleteComment" method="POST" >
+			<form action="?/deleteComment" method="POST">
 				<input type="hidden" name="id" value={comment.id} />
 				<button
 					type="submit"

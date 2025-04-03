@@ -45,49 +45,76 @@
 						<a class="text-gray-500 transition hover:text-gray-500/75" href="/about"> About </a>
 					</li>
 
-					<li class="relative group">
-						<button class=" text-gray-500  px-4 py-2 rounded transition hover:text-gray-500/75">Admin</button>
-						<ul class="absolute left-0 mt-0.1 w-40 rounded shadow-lg hidden group-hover:block">
-							<li><a href="/admin/users" class=" text-gray-500  block px-4 py-2 transition hover:text-gray-500/75 ">Users</a></li>
-							<li><a href="/admin/api/article" class=" text-gray-500  block px-4 py-2 transition hover:text-gray-500/75 ">Articles</a></li>
-							<li><a href="/admin/comments" class=" text-gray-500  block px-4 py-2 transition hover:text-gray-500/75">Comments</a></li>
+					<li class="group relative">
+						<button class=" rounded px-4 py-2 text-gray-500 transition hover:text-gray-500/75"
+							>Admin</button
+						>
+						<ul class="mt-0.1 absolute left-0 hidden w-40 rounded shadow-lg group-hover:block">
+							<li>
+								<a
+									href="/admin/users"
+									class=" block px-4 py-2 text-gray-500 transition hover:text-gray-500/75">Users</a
+								>
+							</li>
+							<li>
+								<a
+									href="/admin/api/article"
+									class=" block px-4 py-2 text-gray-500 transition hover:text-gray-500/75"
+									>Articles</a
+								>
+							</li>
+							<li>
+								<a
+									href="/admin/comments"
+									class=" block px-4 py-2 text-gray-500 transition hover:text-gray-500/75"
+									>Comments</a
+								>
+							</li>
 						</ul>
 					</li>
 				</ul>
 			</nav>
 
 			{#if data.user}
-		
 				<div class="flex items-center justify-center">
 					<form action="/logout?/logout" method="POST" class="p-1">
 						<button
-							class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
+							class="block cursor-pointer rounded-md bg-teal-500 px-1.5 py-1.5 text-xs font-medium text-white transition hover:bg-teal-700"
 							>Logout</button
 						>
 					</form>
-					<form action="/logout?/deleteAccount" method="POST" class="p-1">
-						<button
-							class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
-							>Delete Account</button
-						>
-					</form>
+
+					<details
+						class="block cursor-pointer rounded-md bg-teal-500 px-1.5 py-1.5 text-xs font-medium text-white transition hover:bg-teal-700"
+					>
+						<summary class="cursor-pointer list-none">Delete account</summary>
+
+						<div class="mt-2">
+							<form action="/logout?/deleteAccount" method="POST">
+								<button
+									type="submit"
+									class=" text-white-400 w-full cursor-pointer rounded-md bg-red-500 px-5 py-2 text-xs font-medium transition duration-100 hover:bg-red-700"
+								>
+									Delete
+								</button>
+							</form>
+						</div>
+					</details>
 				</div>
 			{:else}
-				<div class="flex items-center gap-4">
-					<div class="sm:flex sm:gap-4">
-						<a
-							class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
-							href="/login"
-						>
-							Login
-						</a>
-						<a
-							class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
-							href="/register"
-						>
-							Register
-						</a>
-					</div>
+				<div class="flex items-center justify-center gap-1">
+					<a
+						class="block cursor-pointer rounded-md bg-teal-500 p-1 px-1.5 py-1.5 text-xs font-medium text-white transition hover:bg-teal-700"
+						href="/login"
+					>
+						Login
+					</a>
+					<a
+						class="block cursor-pointer rounded-md bg-teal-500 px-1.5 py-1.5 text-xs font-medium text-white transition hover:bg-teal-700"
+						href="/register"
+					>
+						Register
+					</a>
 				</div>
 			{/if}
 		</div>
@@ -103,45 +130,43 @@
 			<h1 class="mt-2 text-lg font-medium">{article.description}</h1>
 			<p class="text-xs text-gray-500">By {article.author}</p>
 			<div>
-			
-			<form action="?/upVote" method="POST">
-				<input type="hidden" name="voteId" value={article.id} />
-				<button type="submit" class="mt-2 rounded bg-blue-500 px-3 py-1 text-sm text-white"
-					>Upvote</button
-				>
-			</form>
-			<p class="text-xs text-gray-500">Votes: {article.votes}</p>
-		    </div>
+				<form action="?/upVote" method="POST">
+					<input type="hidden" name="voteId" value={article.id} />
+					<button type="submit" class="mt-2 rounded bg-blue-500 px-3 py-1 text-sm text-white"
+						>Upvote</button
+					>
+				</form>
+				<p class="text-xs text-gray-500">Votes: {article.votes}</p>
+			</div>
 
 			<form action="?/writeComment" method="POST" class="flex flex-col p-4" use:enhance>
 				<h2 class="text-sm text-blue-600">Send a comment</h2>
 				<input type="hidden" value={article.id} name="articleID" />
 				{#if data.user}
-				<input
-					type="hidden"
-					name="name"
-					value={data.user.username}
-
-					class="my-1 rounded border border-gray-300 p-1 text-sm"
-				/>
-				<input
-					placeholder="Your comment"
-					type="text"
-					name="text"
-					class="my-1 rounded border border-gray-300 p-1 text-sm"
-				/>
+					<input
+						type="hidden"
+						name="name"
+						value={data.user.username}
+						class="my-1 rounded border border-gray-300 p-1 text-sm"
+					/>
+					<input
+						placeholder="Your comment"
+						type="text"
+						name="text"
+						class="my-1 rounded border border-gray-300 p-1 text-sm"
+					/>
 				{:else}
-				<input
-				    placeholder="Write you name"
-					name="name"
-					class="my-1 rounded border border-gray-300 p-1 text-sm"
-				/>
-				<input
-					placeholder="Your comment"
-					type="text"
-					name="text"
-					class="my-1 rounded border border-gray-300 p-1 text-sm"
-				/>
+					<input
+						placeholder="Write you name"
+						name="name"
+						class="my-1 rounded border border-gray-300 p-1 text-sm"
+					/>
+					<input
+						placeholder="Your comment"
+						type="text"
+						name="text"
+						class="my-1 rounded border border-gray-300 p-1 text-sm"
+					/>
 				{/if}
 				<button
 					type="submit"
@@ -194,34 +219,40 @@
 									{/if}
 								{/each}
 
-								<form action="?/writeReply" method="POST" class="flex flex-col p-4 text-black" use:enhance>
+								<form
+									action="?/writeReply"
+									method="POST"
+									class="flex flex-col p-4 text-black"
+									use:enhance
+								>
 									<input type="hidden" value={comment.id} name="commentID" />
 									{#if data.user}
-									<input
-										type="hidden"
-										name="nameReply",
-										value={data.user.username}
-										class="my-1 rounded border border-gray-300 p-1 text-sm"
-									/>
-									<input
-										placeholder="Reply to comment"
-										type="text"
-										name="textReply"
-										class="my-1 rounded border border-gray-300 p-1 text-sm"
-									/>
+										<input
+											type="hidden"
+											name="nameReply"
+											,
+											value={data.user.username}
+											class="my-1 rounded border border-gray-300 p-1 text-sm"
+										/>
+										<input
+											placeholder="Reply to comment"
+											type="text"
+											name="textReply"
+											class="my-1 rounded border border-gray-300 p-1 text-sm"
+										/>
 									{:else}
-									<input
-										placeholder="Your name"
-										type="text"
-										name="nameReply"
-										class="my-1 rounded border border-gray-300 p-1 text-sm"
-									/>
-									<input
-										placeholder="Reply to comment"
-										type="text"
-										name="textReply"
-										class="my-1 rounded border border-gray-300 p-1 text-sm"
-									/>
+										<input
+											placeholder="Your name"
+											type="text"
+											name="nameReply"
+											class="my-1 rounded border border-gray-300 p-1 text-sm"
+										/>
+										<input
+											placeholder="Reply to comment"
+											type="text"
+											name="textReply"
+											class="my-1 rounded border border-gray-300 p-1 text-sm"
+										/>
 									{/if}
 									<button
 										type="submit"

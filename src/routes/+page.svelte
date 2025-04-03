@@ -39,16 +39,40 @@
 					</li>
 
 					<li>
+						<a class="text-gray-500 transition hover:text-gray-500/75" href="/chat">
+							Chat
+						</a>
+					</li>
+
+					<li>
 						<a class="text-gray-500 transition hover:text-gray-500/75" href="/about"> About </a>
 					</li>
-					
 
-					<li class="relative group">
-						<button class=" text-gray-500  px-4 py-2 rounded transition hover:text-gray-500/75">Admin</button>
-						<ul class="absolute left-0 mt-0.1 w-40 rounded shadow-lg hidden group-hover:block">
-							<li><a href="/admin/users" class=" text-gray-500  block px-4 py-2 transition hover:text-gray-500/75 ">Users</a></li>
-							<li><a href="/admin/api/article" class=" text-gray-500  block px-4 py-2 transition hover:text-gray-500/75 ">Articles</a></li>
-							<li><a href="/admin/comments" class=" text-gray-500  block px-4 py-2 transition hover:text-gray-500/75">Comments</a></li>
+					<li class="group relative">
+						<button class=" rounded px-4 py-2 text-gray-500 transition hover:text-gray-500/75"
+							>Admin</button
+						>
+						<ul class="mt-0.1 absolute left-0 hidden w-40 rounded shadow-lg group-hover:block">
+							<li>
+								<a
+									href="/admin/users"
+									class=" block px-4 py-2 text-gray-500 transition hover:text-gray-500/75">Users</a
+								>
+							</li>
+							<li>
+								<a
+									href="/admin/api/article"
+									class=" block px-4 py-2 text-gray-500 transition hover:text-gray-500/75"
+									>Articles</a
+								>
+							</li>
+							<li>
+								<a
+									href="/admin/comments"
+									class=" block px-4 py-2 text-gray-500 transition hover:text-gray-500/75"
+									>Comments</a
+								>
+							</li>
 						</ul>
 					</li>
 				</ul>
@@ -58,33 +82,42 @@
 				<div class="flex items-center justify-center">
 					<form action="/logout?/logout" method="POST" class="p-1">
 						<button
-							class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
+							class="block cursor-pointer rounded-md bg-teal-500 px-1.5 py-1.5 text-xs font-medium text-white transition hover:bg-teal-700"
 							>Logout</button
 						>
 					</form>
-					<form action="/logout?/deleteAccount" method="POST" class="p-1">
-						<button
-							class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
-							>Delete Account</button
-						>
-					</form>
+
+					<details
+						class="block cursor-pointer rounded-md bg-teal-500 px-1.5 py-1.5 text-xs font-medium text-white transition hover:bg-teal-700"
+					>
+						<summary class="cursor-pointer list-none">Delete account</summary>
+
+						<div class="mt-2">
+							<form action="/logout?/deleteAccount" method="POST">
+								<button
+									type="submit"
+									class=" text-white-400 w-full cursor-pointer rounded-md bg-red-500 px-5 py-2 text-xs font-medium transition duration-100 hover:bg-red-700"
+								>
+									Delete
+								</button>
+							</form>
+						</div>
+					</details>
 				</div>
 			{:else}
-				<div class="flex items-center gap-4">
-					<div class="sm:flex sm:gap-4">
-						<a
-							class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
-							href="/login"
-						>
-							Login
-						</a>
-						<a
-							class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
-							href="/register"
-						>
-							Register
-						</a>
-					</div>
+				<div class="flex items-center justify-center gap-1">
+					<a
+						class="block cursor-pointer rounded-md bg-teal-500 p-1 px-1.5 py-1.5 text-xs font-medium text-white transition hover:bg-teal-700"
+						href="/login"
+					>
+						Login
+					</a>
+					<a
+						class="block cursor-pointer rounded-md bg-teal-500 px-1.5 py-1.5 text-xs font-medium text-white transition hover:bg-teal-700"
+						href="/register"
+					>
+						Register
+					</a>
 				</div>
 			{/if}
 		</div>
@@ -92,13 +125,14 @@
 </header>
 
 <!--Header-->
-<div class="flex justify-center items-center">
 
-{#if data.user}
-                <p class="text-black-600 pr-14 text-xl pt-10 font-mono transitiontext-center">
-					Welcome {data.user.username}
-               </p>
-{/if}
+
+<div class="flex items-center justify-center">
+	{#if data.user}
+		<p class="text-black-600 transitiontext-center pt-10 pr-14 font-mono text-xl">
+			Welcome {data.user.username}
+		</p>
+	{/if}
 </div>
 
 <section>
@@ -187,23 +221,23 @@
 									{article.author}
 								</span>
 								<form action="?/upVote" method="POST">
-								<input type="hidden" name="voteId" value={article.id} />
-								<button
-									class="inline-flex items-center rounded text-gray-600 transition-colors duration-100 hover:text-blue-500"
-								>
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										class="mr-1 h-3.5 w-3.5"
-										viewBox="0 0 20 20"
-										fill="currentColor"
+									<input type="hidden" name="voteId" value={article.id} />
+									<button
+										class="inline-flex items-center rounded text-gray-600 transition-colors duration-100 hover:text-blue-500"
 									>
-										<path
-											d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z"
-										/>
-									</svg>
-									{article.votes}
-								</button>
-							</form>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											class="mr-1 h-3.5 w-3.5"
+											viewBox="0 0 20 20"
+											fill="currentColor"
+										>
+											<path
+												d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z"
+											/>
+										</svg>
+										{article.votes}
+									</button>
+								</form>
 							</div>
 						</div>
 					</div>

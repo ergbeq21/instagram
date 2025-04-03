@@ -1,5 +1,6 @@
 <script>
-	let { data } = $props();
+
+    let { data, form } = $props();
 </script>
 
 <!--Header-->
@@ -41,21 +42,20 @@
 							<li>
 								<a
 									href="/admin/users"
-									class=" block bg-white px-4 py-2 text-gray-500 transition hover:text-gray-500/75"
-									>Users</a
+									class=" block px-4 py-2 text-gray-500 transition hover:text-gray-500/75">Users</a
 								>
 							</li>
 							<li>
 								<a
 									href="/admin/api/article"
-									class=" block bg-white px-4 py-2 text-gray-500 transition hover:text-gray-500/75"
+									class=" block px-4 py-2 text-gray-500 transition hover:text-gray-500/75"
 									>Articles</a
 								>
 							</li>
 							<li>
 								<a
 									href="/admin/comments"
-									class="block bg-white px-4 py-2 text-gray-500 transition hover:text-gray-500/75"
+									class=" block px-4 py-2 text-gray-500 transition hover:text-gray-500/75"
 									>Comments</a
 								>
 							</li>
@@ -112,35 +112,23 @@
 
 <!--Header-->
 
-<main class="flex min-h-screen items-center justify-center bg-gray-100 p-5">
-	<div class="w-full max-w-2xl rounded-lg bg-white p-10 text-center shadow-lg">
-		<h1 class="mb-6 text-4xl font-bold text-gray-800">About InstaClone</h1>
+<main class="flex justify-between items-center flex-row">
+    <div class="p-10">
+        <form action="?/searchUser" class="flex justify-between items-center" method="POST">
+            <input type="text" name="username" placeholder="Search username" class="h-10">
+            <button type="submit" class="bg-blue-500 h-10">Search</button>
+        </form>
 
-		<section class="mb-6">
-			<h2 class="mb-2 text-2xl font-semibold text-gray-700">What is InstaClone?</h2>
-			<p class="text-gray-600">
-				InstaClone is a social media clone project inspired by Instagram. It was developed as a
-				learning experience to explore web development, front-end and back-end technologies, and the
-				functionality of modern social platforms.
-			</p>
-		</section>
+        {#if form && form.userInfo}
+            <p>Username: {form.userInfo.username}</p>
+            <p>Email: {form.userInfo.email}</p>
+        {:else if form && form.error}
+            <p>{form.error}</p>
+        {:else}
+            <p></p>
+        {/if}
+    </div>
+    <div>
 
-		<section class="mb-6">
-			<h2 class="mb-2 text-2xl font-semibold text-gray-700">Features</h2>
-			<ul class="mx-auto inline-block list-inside list-disc text-left text-gray-600">
-				<li>Like and comment on posts</li>
-				<li>User authentication and security</li>
-				<li>Responsive and user-friendly interface</li>
-			</ul>
-		</section>
-
-		<section>
-			<h2 class="mb-2 text-2xl font-semibold text-gray-700">Future Development</h2>
-			<p class="text-gray-600">
-				InstaClone is an evolving project. Future updates will include advanced features such as
-				direct messaging, stories, and enhanced performance optimizations to create a better user
-				experience.
-			</p>
-		</section>
-	</div>
+    </div>
 </main>

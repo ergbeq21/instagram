@@ -15,13 +15,13 @@ export async function load({ locals }) {
 
 export const actions = {
 	deleteFavorites: async ({ request }) => {
-		let formData = await request.formData();
+		const formData = await request.formData();
 		const connection = await createConnection();
 
 		const favID = formData.get('favID');
 		await connection.execute('delete from favorites where id = ? ', [favID]);
 	},
-    upVote: async ({ request }) => {
+	upVote: async ({ request }) => {
 		const formData = await request.formData();
 		const voteId = await formData.get('voteId');
 		console.log(voteId);
