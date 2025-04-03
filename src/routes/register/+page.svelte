@@ -25,13 +25,23 @@
 </script>
 
 <div class="flex min-h-screen items-center justify-center bg-gray-100">
+	<div class="w-full max-w-md rounded-lg bg-white p-8 shadow-lg">
 	<form
 		action="?/register"
 		method="POST"
 		use:enhance
-		class="w-full max-w-md rounded-lg bg-white p-8 shadow-lg"
 	>
-		<h1 class="mb-6 text-center text-2xl font-semibold text-gray-800">Register</h1>
+		<h1 class="mb-6 text-center text-2xl font-semibold text-gray-800">Sign up</h1>
+
+		<label for="username" class="mb-2 block text-sm font-medium text-gray-700">Username</label>
+		<input
+			type="text"
+			name="username"
+			id="username"
+			required
+			placeholder="Create a username"
+			class="mb-4 w-full rounded-lg border border-gray-300 p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+		/>
 
 		<label for="email" class="mb-2 block text-sm font-medium text-gray-700">E-Mail</label>
 		<input
@@ -41,15 +51,7 @@
 			id="email"
 			title="This email is not valid"
 			required
-			class="mb-4 w-full rounded-lg border border-gray-300 p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-		/>
-
-		<label for="username" class="mb-2 block text-sm font-medium text-gray-700">Username</label>
-		<input
-			type="text"
-			name="username"
-			id="username"
-			required
+			placeholder="Enter your email"
 			class="mb-4 w-full rounded-lg border border-gray-300 p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
 		/>
 
@@ -61,6 +63,7 @@
 			bind:value={password}
             on:input={validatePassword}
             required
+			placeholder="Create your password"
 			minlength="8"
 			class="mb-3 w-full rounded-lg border border-gray-300 p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
 		/>
@@ -77,4 +80,9 @@
 			<Warning message={form.message} class="mt-4" />
 		{/if}
 	</form>
+		<p class="p-4 text-gray-500 font-light">Already have an account? <a href="/login" class="text-blue-500 font-light pl-1 hover:text-blue-700 transition all duration-100">Log in</a></p>
+
+		<a href="/" class="ml-40 text-blue-400">Go back</a>
+
+	</div>
 </div>

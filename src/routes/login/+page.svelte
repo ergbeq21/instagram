@@ -35,30 +35,18 @@
 						<a class="text-gray-500 transition hover:text-gray-500/75" href="/about"> About </a>
 					</li>
 
-					<li>
-						<a class="text-gray-500 transition hover:text-gray-500/75" href="/admin/users">
-							Users
-						</a>
-					</li>
-
-					<li>
-						<a class="text-gray-500 transition hover:text-gray-500/75" href="/admin/comments">
-							Comments
-						</a>
-					</li>
-
-					<li>
-						<a class="text-gray-500 transition hover:text-gray-500/75" href="/admin/api/article">
-							Articles
-						</a>
+					<li class="relative group">
+						<button class=" text-gray-500  px-4 py-2 rounded transition hover:text-gray-500/75">Admin</button>
+						<ul class="absolute left-0 mt-0.1 w-40 rounded shadow-lg hidden group-hover:block">
+							<li><a href="/admin/users" class=" text-gray-500  block px-4 py-2 transition hover:text-gray-500/75 ">Users</a></li>
+							<li><a href="/admin/api/article" class=" text-gray-500  block px-4 py-2 transition hover:text-gray-500/75 ">Articles</a></li>
+							<li><a href="/admin/comments" class=" text-gray-500  block px-4 py-2 transition hover:text-gray-500/75">Comments</a></li>
+						</ul>
 					</li>
 				</ul>
 			</nav>
 
 			{#if data.user}
-				<a class="text-black-600 pr-14 transition hover:text-gray-500/75" href="/"
-					>Welcome back {data.user.username}
-				</a>
 
 				<div class="flex items-center justify-center">
 					<form action="/logout?/logout" method="POST" class="p-1">
@@ -98,18 +86,18 @@
 
 <!--Header-->
 
+
 {#if data.user}
 	<main class="flex items-center justify-center p-50">
 		<p>This section is only for admins</p>
 	</main>
 {:else}
 	<div class="flex min-h-screen items-center justify-center bg-gray-100">
+		<div class="w-full max-w-md rounded-lg bg-white p-8 shadow-lg">
 		<form
 			action="?/login"
 			method="POST"
-			use:enhance
-			class="w-full max-w-md rounded-lg bg-white p-8 shadow-lg"
-		>
+			use:enhance		>
 			<h1 class="mb-6 text-center text-2xl font-semibold text-gray-800">Login</h1>
 
 			<label for="email" class="mb-2 block text-sm font-medium text-gray-700">E-Mail</label>
@@ -118,6 +106,7 @@
 				name="email"
 				id="email"
 				required
+				placeholder="Enter your email"
 				class="mb-4 w-full rounded-lg border border-gray-300 p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
 			/>
 
@@ -127,19 +116,24 @@
 				name="password"
 				id="password"
 				required
+				placeholder="Enter your password"
 				class="mb-6 w-full rounded-lg border border-gray-300 p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
 			/>
 
 			<button
 				type="submit"
-				class="w-full rounded-lg bg-teal-500 p-3 text-white hover:bg-teal-600 focus:ring-2 focus:ring-teal-500 focus:outline-none"
+				class="w-full rounded-lg bg-blue-500 p-3 text-white hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
 				>Login</button
 			>
 
 			{#if form}
 				<Warning message={form.message} class="mt-4" />
 			{/if}
-			<a href="/" class="ml-40 text-teal-400">Go back</a>
 		</form>
+		<p class="p-4 text-gray-500 font-light">Don't have an account? <a href="/register" class="text-blue-500 font-light pl-1 hover:text-blue-700 transition all duration-100">Sign up</a></p>
+
+		<a href="/" class="ml-40 text-blue-400">Go back</a>
+
+	</div>
 	</div>
 {/if}

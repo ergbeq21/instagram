@@ -13,12 +13,12 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		height: 20px;
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8);
-		padding: 10px;
+		height: 10px;
+		padding: 13px;
 		margin: 10px;
 	}
 	p {
 		font-family: 'Courier New', Courier, monospace;
+		font-size: 13px;
 	}
 </style>
