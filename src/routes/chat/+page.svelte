@@ -3,6 +3,17 @@
     let { data, form } = $props();
 
     console.log(data.messages);
+	
+
+	// svelte-ignore non_reactive_update
+		let isOpen = false; // Track if details is open
+
+  function handleSendMessageResult({ result }) {
+    if (result?.type === 'success') {
+      isOpen = true; // Keep messages open after sending a message
+    }
+  }
+	
 </script>
 
 <!--Header-->
@@ -117,7 +128,8 @@
 	</div>
 </header>
 
-<!--Header-->
+<!--Header-->	
+
 
 
 
@@ -139,27 +151,33 @@
         {/if}
 
         {#if form && form.userInfo}
-            <details class="cursor-pointer">
-                <summary>See your messages with {form.userInfo.username}</summary>
-                {#each data.messages as message}
-                    {#if (message.user_id === form.userInfo.id && message.user2_id === data.user.id) || (message.user_id === data.user.id && message.user2_id === form.userInfo.id)}
-                        <p>{message.user_id === form.userInfo.id ? 'You' : form.userInfo.username}: {message.text}</p>
-                    {/if}
-                {/each}
-            </details>
+		<details bind:open={isOpen} class="cursor-pointer">
+			<summary>See your messages with {form.userInfo.username}</summary>
+			{#each data.messages as message}
+			  {#if (message.user_id === form.userInfo.id && message.user2_id === data.user.id) || (message.user_id === data.user.id && message.user2_id === form.userInfo.id)}
+				<p>{message.user_id === form.userInfo.id ? 'You' : form.userInfo.username}: {message.text}  
+				  <span class="text-xs text-gray-400">{message.created_at}</span>
+				</p>
+			  {/if}
+			{/each}
+		  </details>
         {/if}
     </div>
 
     <div class="ml-10">
         {#if form && form.userInfo}
-            <form action="?/sendMessage" method="POST" class="bg-white shadow-lg rounded-lg p-6 w-80" use:enhance>
-                <p class="font-semibold text-sm mb-2">Send Message to {form.userInfo.username}</p>
+            <form action="?/searchUser" method="POST" class="bg-white shadow-lg rounded-lg p-6 w-80" use:enhance>
+                <input type="hidden" name="sendMessage" value="true">
+                <input type="hidden" name="username" value={form.userInfo.username}>
                 <input type="hidden" name="userID" value={form.userInfo.id}>
                 <input type="hidden" name="user2ID" value={data.user.id}>
-                <input type="text" name="text" class="w-full h-10 px-4 border rounded-lg mb-3 text-sm" placeholder="Write a message...">
+
+                <p class="font-semibold text-sm mb-2">Send Message to {form.userInfo.username}</p>
+                <input type="text" name="text" class="w-full h-10 px-4 border rounded-lg mb-3 text-sm" placeholder="Write a message..." required>
                 <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600">Send message</button>
             </form>
         {/if}
     </div>
 </main>
+
 

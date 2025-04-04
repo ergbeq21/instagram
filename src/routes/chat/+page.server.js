@@ -23,33 +23,66 @@ export async function load({ locals }) {
 export const actions = {
     searchUser: async ({ request }) => {
         const formData = await request.formData();
-        let username = formData.get('username');
+    
 
+        if (formData.get('sendMessage')) {
+            const userID = formData.get('userID');
+            const text = formData.get('text');
+            const user2ID = formData.get('user2ID');
+            const username = formData.get('username'); 
+    
+            const connection = await createConnection();
+            
+
+            try {
+                await connection.execute(
+                    'INSERT INTO message (text, user_id, user2_id) VALUES (?, ?, ?)',
+                    [text, userID, user2ID]
+                );
+            } catch (error) {
+                console.error('Message send error:', error);
+                return {
+                    error: 'Failed to send message'
+                };
+            }
+    
+
+            let [rows] = await connection.execute(
+                'SELECT id, username, email FROM users WHERE username = ?',
+                [username]
+            );
+    
+            return {
+                userInfo: rows[0]
+            };
+        }
+    
+        const username = formData.get('username');
+    
         if (!username) {
             return {
                 userInfo: null,
                 error: 'Username is required'
             };
         }
-
+    
         const connection = await createConnection();
-
-            let [rows] = await connection.execute(
-                'SELECT id, username, email FROM users WHERE username = ?',
-                [username]
-            );
-
-            if (rows.length === 0) {
-                return {
-                    userInfo: null,
-                    error: 'No user found'
-                };
-            }
-
+    
+        let [rows] = await connection.execute(
+            'SELECT id, username, email FROM users WHERE username = ?',
+            [username]
+        );
+    
+        if (rows.length === 0) {
             return {
-                userInfo: rows[0]
+                userInfo: null,
+                error: 'No user found'
             };
-        
+        }
+    
+        return {
+            userInfo: rows[0]
+        };
     },
     sendMessage: async ({ request }) => {
         const formData = await request.formData();
