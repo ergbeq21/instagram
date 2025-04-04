@@ -66,6 +66,7 @@ export const actions = {
             };
         }
     
+
         const connection = await createConnection();
     
         let [rows] = await connection.execute(
@@ -100,5 +101,5 @@ export const actions = {
             console.error('Database query error:', error);
             throw error;
         } 
-    } 
+    }
 };
