@@ -22,7 +22,7 @@
 
 <div class="flex min-h-screen items-center justify-center bg-gray-100">
 	<div class="w-full max-w-md rounded-lg bg-white p-8 shadow-lg">
-		<form action="?/register" method="POST" use:enhance>
+		<form action="?/register" method="POST" enctype="multipart/form-data" use:enhance>
 			<h1 class="mb-6 text-center text-2xl font-semibold text-gray-800">Sign up</h1>
 
 			<label for="username" class="mb-2 block text-sm font-medium text-gray-700">Username</label>
@@ -32,6 +32,15 @@
 				id="username"
 				required
 				placeholder="Create a username"
+				class="mb-4 w-full rounded-lg border border-gray-300 p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+			/>
+
+			<label for="username" class="mb-2 block text-sm font-medium text-gray-700">Profile Image</label>
+			<input
+				type="file"
+				name="image"
+				id="image"
+				required
 				class="mb-4 w-full rounded-lg border border-gray-300 p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
 			/>
 

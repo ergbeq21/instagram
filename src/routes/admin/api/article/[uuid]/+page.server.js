@@ -7,9 +7,13 @@ export async function load({ locals }) {
 
 	let [replyRows] = await connection.execute('select * from reply;');
 
+	let [userRows] = await connection.execute('select * from users');
+
+
 	return {
 		comments: rows,
 		replys: replyRows,
+		users: userRows,
 		user: locals.user
 	};
 }

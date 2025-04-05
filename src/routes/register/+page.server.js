@@ -7,8 +7,9 @@ export const actions = {
 		const email = formData.get('email');
 		const password = formData.get('password');
 		const username = formData.get('username');
+		const image = formData.get('image');
 
-		const { token, message } = await register(email, username, password);
+		const { token, message } = await register(email, username, password,image);
 
 		if (token) {
 			cookies.set('session', token, {
