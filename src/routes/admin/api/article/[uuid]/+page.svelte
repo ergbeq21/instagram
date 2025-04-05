@@ -194,7 +194,9 @@
 						<div class="flex items-start gap-3">
 					        {#each data.users as profileUser}
 		                    {#if profileUser.username === comment.name}
-			                 <img src={profileUser.image} alt="profile" class="h-10 w-10 rounded-full object-cover"/>
+
+									<img src={profileUser.image} alt="profile" class="h-10 w-10 rounded-full object-cover"/>
+
 		                   {/if}
 	                       {/each}
 
