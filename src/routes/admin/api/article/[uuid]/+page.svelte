@@ -130,6 +130,7 @@
 	</div>
 </header>
 
+
 <!--Header-->
 
 <div class="flex min-h-screen items-center justify-center">
@@ -198,8 +199,8 @@
 	                       {/each}
 
 							<div>
-								<p class="font-mono text-xs"><strong>From:</strong> {comment.name}</p>
-								<p class="font-mono text-xs"><strong>Comment:</strong> {comment.text}</p>
+								<p class="font-mono text-xs text-gray-300"> {comment.name}</p>
+								<p class="font-mono text-xs pt-1.5">{comment.text}</p>
 							</div>
 						</div>
 					
@@ -217,8 +218,10 @@
 						</div>
 					
 						<details>
-							<summary class="cursor-pointer">View replys</summary>
-					
+							<summary class="cursor-pointer  flex items-center text-gray-300">
+								<hr class="w-10 border-t-1 border-gray-300 m-2">
+								 View replies
+							</summary>			
 							{#each data.replys as reply}
 								{#if reply.comment_id == comment.id}
 									<div class="my-1 rounded-lg bg-blue-400 p-1.5 text-left text-white shadow-md">
