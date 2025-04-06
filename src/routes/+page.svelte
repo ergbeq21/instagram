@@ -40,12 +40,13 @@
 								src={article.image}
 								alt={article.description}
 								class="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
+								loading="lazy"
 							/>
 
 							<!--Add to favourites function-->
 
 							{#if data.user}
-								{#if data.favorites.some((fav) => fav.article_id == article.id && fav.user_id == data.user.id)}
+								{#if data.favorites.find((fav) => fav.article_id == article.id && fav.user_id == data.user.id)}
 									{#each data.favorites.filter((fav) => fav.article_id == article.id && fav.user_id == data.user.id) as favorite}
 										<form action="?/deleteFavorites" method="POST" use:enhance>
 											<input type="hidden" name="favID" value={favorite.id} />
