@@ -3,9 +3,6 @@
 	let { data, form } = $props();
 </script>
 
-
-
-
 <div class="flex flex-col items-center justify-center">
 	<h1 class="p-5 text-center text-5xl">Admin page</h1>
 	<p class="text-2xl">This is the comment section</p>

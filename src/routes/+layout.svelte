@@ -1,9 +1,8 @@
 <script>
 	import '../app.css';
 
-	let { data,children } = $props();
+	let { data, children } = $props();
 </script>
-
 
 <header class="bg-white">
 	<div class="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8">
@@ -31,9 +30,7 @@
 					</li>
 
 					<li>
-						<a class="text-gray-500 transition hover:text-gray-500/75" href="/chat">
-							Chat
-						</a>
+						<a class="text-gray-500 transition hover:text-gray-500/75" href="/chat"> Chat </a>
 					</li>
 
 					<li>
@@ -95,6 +92,11 @@
 							</form>
 						</div>
 					</details>
+					<img
+						src={data.user.image}
+						alt="User profile"
+						class="m-2 h-12 w-12 rounded-full border-2 border-teal-500 object-cover"
+					/>
 				</div>
 			{:else}
 				<div class="flex items-center justify-center gap-1">
@@ -116,10 +118,7 @@
 	</div>
 </header>
 
-
 {@render children()}
-
-
 
 <!-- Footer-->
 

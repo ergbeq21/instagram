@@ -11,7 +11,6 @@
 	});
 </script>
 
-
 <div class="flex items-center justify-center">
 	{#if data.user}
 		<p class="text-black-600 transitiontext-center pt-10 pr-14 font-mono text-xl">

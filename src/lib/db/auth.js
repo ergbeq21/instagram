@@ -39,7 +39,7 @@ export let login = async (email, password) => {
 	return token;
 };
 
-export let register = async (email, username, password,image) => {
+export let register = async (email, username, password, image) => {
 	let connection = await createConnection();
 	let hashedPassword = await hashPassword(password); // Check if email is already in use
 
@@ -53,16 +53,18 @@ export let register = async (email, username, password,image) => {
 		return { token: null, message: 'Username already in use' };
 	} // Create user
 
-
 	if (!image) {
-		throw error(400, { message: "No file to upload." });
+		throw error(400, { message: 'No file to upload.' });
 	}
 
-	const { url } = await put('insta-images/'+ image.name, image, { access: "public", token:BLOB_READ_WRITE_TOKEN });
+	const { url } = await put('insta-images/' + image.name, image, {
+		access: 'public',
+		token: BLOB_READ_WRITE_TOKEN
+	});
 
 	let [result] = await connection.execute(
 		'INSERT INTO users (email, username, password_hash, role,image) VALUES (?, ?, ?, ?,?)',
-		[email, username, hashedPassword, 'user',url]
+		[email, username, hashedPassword, 'user', url]
 	); // Create token
 
 	const token = crypto.randomUUID(); // Create expiration date (1 week)

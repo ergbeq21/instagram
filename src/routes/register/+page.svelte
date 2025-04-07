@@ -35,7 +35,9 @@
 				class="mb-4 w-full rounded-lg border border-gray-300 p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
 			/>
 
-			<label for="username" class="mb-2 block text-sm font-medium text-gray-700">Profile Image</label>
+			<label for="username" class="mb-2 block text-sm font-medium text-gray-700"
+				>Profile Image</label
+			>
 			<input
 				type="file"
 				name="image"
