@@ -6,6 +6,7 @@ export async function load({ locals }) {
 	const [favRows] = await connection.execute('select * from favorites;');
 	const [upvoteRows] = await connection.execute('select * from upvotes');
 
+
 	return {
 		user: locals.user,
 		favorites: favRows,

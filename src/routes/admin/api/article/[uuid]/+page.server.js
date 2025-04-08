@@ -39,6 +39,7 @@ export const actions = {
 			'INSERT INTO comments (name, text, article_id) VALUES (?, ?,?)',
 			[name, text, article_id]
 		);
+		await connection.execute('update articles set comments = comments + 1 where id = ?',[article_id]);
 	},
 	writeReply: async ({ request }) => {
 		const formData = await request.formData();

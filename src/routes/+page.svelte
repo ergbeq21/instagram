@@ -4,6 +4,9 @@
 	import { BookmarkCheck } from 'lucide-svelte';
 	import { Bookmark } from 'lucide-svelte';
 	import { Confetti } from 'svelte-confetti';
+	import { MessageSquareMore } from 'lucide-svelte';
+
+
 
 	let { data } = $props();
 
@@ -24,7 +27,7 @@
 
 <div class="flex items-center justify-center flex-col">
 	{#if data.user}
-	<Confetti />
+	    <Confetti />
 		<p class="text-black-600 transitiontext-center pt-10 pr-14 text-xl font-extralight">
 			Welcome {data.user.username} 
 		</p>
@@ -125,6 +128,11 @@
 									</svg>
 									{article.author}
 								</span>
+								<span class="inline-flex items-center text-gray-600">
+									<MessageSquareMore size="15" class="mr-1" />
+
+									{article.comments}
+								</span>
 								{#if data.user}
 									{#if data.upvotes.find((upvote) => upvote.article_id == article.id && upvote.user_id == data.user.id)}
 										<form action="?/downVote" method="POST">
@@ -147,6 +155,7 @@
 												{article.votes}
 											</button>
 										</form>
+
 									{:else}
 										<form action="?/upVote" method="POST">
 											<input type="hidden" name="voteId" value={article.id} />
@@ -168,6 +177,7 @@
 												{article.votes}
 											</button>
 										</form>
+
 									{/if}
 								{:else}
 									<button
@@ -185,6 +195,7 @@
 										</svg>
 										{article.votes}
 									</button>
+
 								{/if}
 							</div>
 						</div>

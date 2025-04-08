@@ -24,11 +24,14 @@ export const actions = {
 		const formData = await request.formData();
 		const id = formData.get('id');
 		const connection = await createConnection();
-
-		//await connection.execute('update reply set comment_id = null where comment_id = ?',[id]);
-		await connection.execute('delete from reply where comment_id = ? ', [id]);
-
+	
+		const [rows] = await connection.execute('SELECT articles.id FROM comments JOIN articles ON comments.article_id = articles.id WHERE comments.id = ?', [id]);
+		const article_id = rows[0].id;
+	
+		await connection.execute('delete from reply where comment_id = ?', [id]);
 		await connection.execute('Delete from comments where id = ?', [id]);
+	
+		await connection.execute('update articles set comments = comments - 1 where id = ?', [article_id]);
 	},
 	deleteReply: async ({ request }) => {
 		const formData = await request.formData();
