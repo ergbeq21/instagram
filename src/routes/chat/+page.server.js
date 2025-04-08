@@ -43,7 +43,7 @@ export const actions = {
 			}
 
 			let [rows] = await connection.execute(
-				'SELECT id, username, email FROM users WHERE username = ?',
+				'SELECT id, username, email,image FROM users WHERE username = ?',
 				[username]
 			);
 
@@ -64,7 +64,7 @@ export const actions = {
 		const connection = await createConnection();
 
 		let [rows] = await connection.execute(
-			'SELECT id, username, email FROM users WHERE username = ?',
+			'SELECT id, image, username, email FROM users WHERE username = ?',
 			[username]
 		);
 
@@ -96,5 +96,13 @@ export const actions = {
 			console.error('Database query error:', error);
 			throw error;
 		}
+	},
+	deleteYourMessage: async ({ request }) => {
+		const formaData = await request.formData();
+		const messageID = await formaData.get('messageID');
+
+		const connection = await createConnection();
+
+		await connection.execute('delete from message where id = ?', [messageID]);
 	}
 };

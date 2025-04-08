@@ -1,6 +1,10 @@
 <script>
 	import { enhance } from '$app/forms';
 	import { onMount } from 'svelte';
+	import { BookmarkCheck } from 'lucide-svelte';
+	import { Bookmark } from 'lucide-svelte';
+	import { Confetti } from 'svelte-confetti';
+
 	let { data } = $props();
 
 	let articles = $state([]);
@@ -9,14 +13,27 @@
 		const res = await fetch('/admin/api/article');
 		articles = await res.json();
 	});
+
+	
+	
+
+
+		
+
 </script>
 
-<div class="flex items-center justify-center">
+<div class="flex items-center justify-center flex-col">
 	{#if data.user}
+	<Confetti />
 		<p class="text-black-600 transitiontext-center pt-10 pr-14 text-xl font-extralight">
-			Welcome {data.user.username}
+			Welcome {data.user.username} 
 		</p>
+		<Confetti />
+
 	{/if}
+	
+	
+
 </div>
 
 <section>
@@ -52,7 +69,8 @@
 											<button
 												class="absolute top-2 right-2 flex cursor-pointer items-center gap-1 rounded bg-red-600 px-2 py-1 text-xs text-white shadow-md transition duration-500 hover:bg-red-500"
 											>
-												<span class="hidden sm:inline">Added to</span> ♥
+											<BookmarkCheck />
+
 											</button>
 										</form>
 									{/each}
@@ -63,7 +81,8 @@
 										<button
 											class="absolute top-2 right-2 flex cursor-pointer items-center gap-1 rounded bg-teal-600 px-2 py-1 text-xs text-white shadow-md transition duration-500 hover:bg-teal-500"
 										>
-											<span class="hidden sm:inline">Add to</span> ♥
+										<Bookmark />
+
 										</button>
 									</form>
 								{/if}

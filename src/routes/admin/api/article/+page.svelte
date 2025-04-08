@@ -1,5 +1,8 @@
 <script>
 	let { data } = $props();
+	import { Delete } from 'lucide-svelte';
+
+
 </script>
 
 <!--Header-->
@@ -31,7 +34,9 @@
 						type="submit"
 						class="cursor-pointer rounded-md bg-red-600 px-4 py-2 text-white transition duration-300 hover:bg-red-700"
 					>
-						Delete
+					<Delete />
+
+
 					</button>
 				</form>
 			</div>

@@ -1,6 +1,8 @@
 <script>
 	import { enhance } from '$app/forms';
 	let { data, form } = $props();
+	import { MessageSquareX } from 'lucide-svelte';
+
 </script>
 
 <div class="flex flex-col items-center justify-center">
@@ -21,7 +23,8 @@
 					type="submit"
 					class="cursor-pointer rounded-md bg-red-600 px-4 py-2 text-white transition duration-300 hover:bg-red-700"
 				>
-					Delete
+				<MessageSquareX />
+
 				</button>
 			</form>
 
@@ -40,7 +43,8 @@
 								type="submit"
 								class=" cursor-pointer rounded-md bg-red-600 px-4 py-2 pt-1 text-xs text-white transition duration-300 hover:bg-red-700"
 							>
-								Delete
+							<MessageSquareX />
+
 							</button>
 						</form>
 					{/if}

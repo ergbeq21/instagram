@@ -17,7 +17,7 @@
 		"@sveltejs/adapter-auto": "^4.0.0",
 		"@sveltejs/kit": "^2.16.0",
 		"@sveltejs/vite-plugin-svelte": "^5.0.0",
-		"@tailwindcss/forms": "^0.5.9",
+		"@tailwindcss/forms": "^0.5.10",
 		"@tailwindcss/typography": "^0.5.15",
 		"@tailwindcss/vite": "^4.0.0",
 		"eslint": "^9.18.0",
@@ -34,6 +34,13 @@
 	"dependencies": {
 		"@vercel/blob": "^0.27.3",
 		"bcrypt": "^5.1.1",
-		"mysql2": "^3.14.0"
+		"lucide-svelte": "^0.487.0",
+		"mysql2": "^3.14.0",
+		"svelte-auto-animate": "^0.0.1",
+		"svelte-confetti": "^2.3.1",
+		"svelte-motion": "^0.12.2",
+		"svelte-particles": "^2.12.0",
+		"svelte-scrollto": "^0.2.0",
+		"sveltekit-superforms": "^2.24.1"
 	}
 }

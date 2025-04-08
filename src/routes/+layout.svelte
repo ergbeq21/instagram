@@ -1,5 +1,9 @@
 <script>
 	import '../app.css';
+	import { LogOut } from 'lucide-svelte';
+	import { UserRoundX } from 'lucide-svelte';
+
+
 
 	let { data, children } = $props();
 </script>
@@ -81,7 +85,8 @@
 						>
 							<button
 								class="block cursor-pointer rounded-md bg-teal-500 px-1.5 py-1.5 text-xs font-medium text-white transition hover:bg-teal-700"
-								>Logout</button
+								><LogOut />
+								</button
 							>
 						</form>
 
@@ -92,9 +97,10 @@
 						>
 							<button
 								type="submit"
-								class=" text-white-400 w-full cursor-pointer rounded-md bg-red-500 px-5 py-2 text-xs font-medium transition duration-100 hover:bg-red-700"
+								class=" text-white-400 px-1.5 py-1.5 cursor-pointer rounded-md bg-red-500 text-xs font-medium transition duration-100 hover:bg-red-700"
 							>
-								Delete
+							<UserRoundX />
+
 							</button>
 						</form>
 					</ul>

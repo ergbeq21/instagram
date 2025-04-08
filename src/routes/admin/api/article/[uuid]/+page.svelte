@@ -3,6 +3,9 @@
 	import { page } from '$app/stores';
 	import { get } from 'svelte/store';
 	import { enhance } from '$app/forms';
+
+	import { ChevronDown } from 'lucide-svelte';
+
 	let { data, form } = $props();
 
 	console.log(data.users);
@@ -42,9 +45,8 @@
 						</form>
 					{/if}
 				{/if}
+				<p class="m-2 text-xs text-gray-500">Votes: {article.votes}</p>
 			</div>
-
-			<p class="m-2 text-xs text-gray-500">Votes: {article.votes}</p>
 
 			<form action="?/writeComment" method="POST" class="flex flex-col p-4" use:enhance>
 				<h2 class="text-sm text-blue-600">Send a comment</h2>
@@ -177,7 +179,8 @@
 							<details>
 								<summary class="flex cursor-pointer items-center text-gray-300">
 									<hr class="m-2 w-10 border-t-1 border-gray-300" />
-									View replies
+									View replies <ChevronDown size="15" class="mt-1 "/>
+
 								</summary>
 								{#each data.replys as reply}
 									{#if reply.comment_id == comment.id}
