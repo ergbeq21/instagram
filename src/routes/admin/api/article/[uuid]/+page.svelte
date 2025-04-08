@@ -23,30 +23,28 @@
 			<h1 class="mt-2 text-lg font-medium">{article.description}</h1>
 			<p class="text-xs text-gray-500">By {article.author}</p>
 			<div>
-
 				{#if data.user}
-				{#if data.upvotes.find((upvote) => upvote.article_id == article.id && upvote.user_id == data.user.id)}
-				<form action="?/downVote" method="POST">
-					<input type="hidden" name="voteId" value={article.id} />
-					<input type="hidden" name="userID" value={data.user.id}>
-					<button type="submit" class="mt-2 rounded bg-red-500 px-3 py-1 text-sm text-white"
-						>Down vote</button
-					>
-				</form>
-				{:else}
-				<form action="?/upVote" method="POST">
-					<input type="hidden" name="voteId" value={article.id} />
-					<input type="hidden" name="userID" value={data.user.id}>
-					<button type="submit" class="mt-2 rounded bg-blue-500 px-3 py-1 text-sm text-white"
-						>Upvote</button
-					>
-				</form>
-				{/if}
+					{#if data.upvotes.find((upvote) => upvote.article_id == article.id && upvote.user_id == data.user.id)}
+						<form action="?/downVote" method="POST">
+							<input type="hidden" name="voteId" value={article.id} />
+							<input type="hidden" name="userID" value={data.user.id} />
+							<button type="submit" class="mt-2 rounded bg-red-500 px-3 py-1 text-sm text-white"
+								>Down vote</button
+							>
+						</form>
+					{:else}
+						<form action="?/upVote" method="POST">
+							<input type="hidden" name="voteId" value={article.id} />
+							<input type="hidden" name="userID" value={data.user.id} />
+							<button type="submit" class="mt-2 rounded bg-blue-500 px-3 py-1 text-sm text-white"
+								>Upvote</button
+							>
+						</form>
+					{/if}
 				{/if}
 			</div>
 
-			<p class="text-xs text-gray-500 m-2">Votes: {article.votes}</p>
-
+			<p class="m-2 text-xs text-gray-500">Votes: {article.votes}</p>
 
 			<form action="?/writeComment" method="POST" class="flex flex-col p-4" use:enhance>
 				<h2 class="text-sm text-blue-600">Send a comment</h2>
@@ -91,78 +89,91 @@
 						<div class="my-2 rounded-lg bg-blue-600 p-3 text-left text-white shadow-md">
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-start gap-3">
-								  {#each data.users as profileUser}
-									{#if profileUser.username === comment.name}
-									  <img
-										src={profileUser.image}
-										alt="profile"
-										class="h-10 w-10 rounded-full object-cover"
-									  />
-									{/if}
-								  {/each}
-							  
-								  <div>
-									<p class="font-mono text-xs text-gray-300">{comment.name}</p>
-									<p class="pt-1.5 font-mono text-xs">{comment.text}</p>
-								  </div>
-								</div>
-							  
-								{#if data.user}
+									{#each data.users as profileUser}
+										{#if profileUser.username === comment.name}
+											<img
+												src={profileUser.image}
+												alt="profile"
+												class="h-10 w-10 rounded-full object-cover"
+											/>
+										{/if}
+									{/each}
 
-								{#if data.commentLikes.find((comLike) => comLike.comment_id == comment.id && comLike.user_id == data.user.id)}
-								  <form action="?/removelikeComment" method="POST" class="flex items-center" use:enhance>
-									<input type="hidden" name="commentId" value={comment.id} />
-									<input type="hidden" name="userId" value={data.user.id} />
-							  
-									<button class="flex flex-col items-center mt-2 text-red-600 hover:text-red-700 transition-colors duration-100">
-									  <svg
-										xmlns="http://www.w3.org/2000/svg"
-										class="h-5 w-5"
-										viewBox="0 0 24 24"
-										fill="currentColor"
-									  >
-										<path
-										  d="M12.1 21.35l-1.1-1.01C5.14 15.24 2 12.39 2 8.5 
+									<div>
+										<p class="font-mono text-xs text-gray-300">{comment.name}</p>
+										<p class="pt-1.5 font-mono text-xs">{comment.text}</p>
+									</div>
+								</div>
+
+								{#if data.user}
+									{#if data.commentLikes.find((comLike) => comLike.comment_id == comment.id && comLike.user_id == data.user.id)}
+										<form
+											action="?/removelikeComment"
+											method="POST"
+											class="flex items-center"
+											use:enhance
+										>
+											<input type="hidden" name="commentId" value={comment.id} />
+											<input type="hidden" name="userId" value={data.user.id} />
+
+											<button
+												class="mt-2 flex flex-col items-center text-red-600 transition-colors duration-100 hover:text-red-700"
+											>
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													class="h-5 w-5"
+													viewBox="0 0 24 24"
+													fill="currentColor"
+												>
+													<path
+														d="M12.1 21.35l-1.1-1.01C5.14 15.24 2 12.39 2 8.5 
 											 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09 
 											 C13.09 3.81 14.76 3 16.5 3 
 											 19.58 3 22 5.42 22 8.5 
 											 c0 3.89-3.14 6.74-9 11.84l-0.9.81z"
-										/>
-									  </svg>
-									  <span class="text-xs font-light">{comment.likes}</span>
-									</button>
-								  </form>
-								{:else}
-								  <form action="?/likeComment" method="POST" class="flex items-center" use:enhance>
-									<input type="hidden" name="commentId" value={comment.id} />
-									<input type="hidden" name="userId" value={data.user.id} />
-							  
-									<button class="flex flex-col items-center mt-2 text-white hover:text-red-500 transition-colors duration-100">
-									  <svg
-										xmlns="http://www.w3.org/2000/svg"
-										class="h-5 w-5"
-										viewBox="0 0 24 24"
-										fill="none"
-										stroke="currentColor"
-										stroke-width="2"
-									  >
-										<path
-										  stroke-linecap="round"
-										  stroke-linejoin="round"
-										  d="M12.1 21.35l-1.1-1.01C5.14 15.24 2 12.39 2 8.5 
+													/>
+												</svg>
+												<span class="text-xs font-light">{comment.likes}</span>
+											</button>
+										</form>
+									{:else}
+										<form
+											action="?/likeComment"
+											method="POST"
+											class="flex items-center"
+											use:enhance
+										>
+											<input type="hidden" name="commentId" value={comment.id} />
+											<input type="hidden" name="userId" value={data.user.id} />
+
+											<button
+												class="mt-2 flex flex-col items-center text-white transition-colors duration-100 hover:text-red-500"
+											>
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													class="h-5 w-5"
+													viewBox="0 0 24 24"
+													fill="none"
+													stroke="currentColor"
+													stroke-width="2"
+												>
+													<path
+														stroke-linecap="round"
+														stroke-linejoin="round"
+														d="M12.1 21.35l-1.1-1.01C5.14 15.24 2 12.39 2 8.5 
 											 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09 
 											 C13.09 3.81 14.76 3 16.5 3 
 											 19.58 3 22 5.42 22 8.5 
 											 c0 3.89-3.14 6.74-9 11.84l-0.9.81z"
-										/>
-									  </svg>
-									  <span class="text-xs font-light">{comment.likes}</span>
-									</button>
-								  </form>
+													/>
+												</svg>
+												<span class="text-xs font-light">{comment.likes}</span>
+											</button>
+										</form>
+									{/if}
 								{/if}
-								{/if}
-							  </div>
-							  
+							</div>
+
 							<details>
 								<summary class="flex cursor-pointer items-center text-gray-300">
 									<hr class="m-2 w-10 border-t-1 border-gray-300" />
@@ -170,83 +181,95 @@
 								</summary>
 								{#each data.replys as reply}
 									{#if reply.comment_id == comment.id}
-										<div class="my- p-1.5 ml-5 text-left text-white flex items-start justify-between gap-3">
+										<div
+											class="my- ml-5 flex items-start justify-between gap-3 p-1.5 text-left text-white"
+										>
 											<div class="flex items-start gap-3">
 												{#each data.users as profileUser}
-												  {#if profileUser.username === reply.name}
-													<img
-													  src={profileUser.image}
-													  alt="profile"
-													  class="h-10 w-10 rounded-full object-cover"
-													/>
-												  {/if}
+													{#if profileUser.username === reply.name}
+														<img
+															src={profileUser.image}
+															alt="profile"
+															class="h-10 w-10 rounded-full object-cover"
+														/>
+													{/if}
 												{/each}
-											
 
-											  <div>
-												  <p class="font-mono text-xs text-gray-300">{reply.name} <span> ▶ {comment.name}</span></p>
-												  <p class="pt-1.5 font-mono text-xs">{reply.text}</p>
+												<div>
+													<p class="font-mono text-xs text-gray-300">
+														{reply.name} <span> ▶ {comment.name}</span>
+													</p>
+													<p class="pt-1.5 font-mono text-xs">{reply.text}</p>
 												</div>
-											  </div>
+											</div>
 
-											  
-
-
-
-											  {#if data.user}
-
-											  {#if data.replyLikes.find((repLike) => repLike.reply_id == reply.id && repLike.user_id == data.user.id)}
-												<form action="?/removelikeReply" method="POST" class="flex items-center" use:enhance>
-												  <input type="hidden" name="replyId" value={reply.id} />
-												  <input type="hidden" name="userId" value={data.user.id} />
-											
-												  <button class="flex flex-col items-center mt-2 text-red-600 hover:text-red-700 transition-colors duration-100">
-													<svg
-													  xmlns="http://www.w3.org/2000/svg"
-													  class="h-5 w-5"
-													  viewBox="0 0 24 24"
-													  fill="currentColor"
+											{#if data.user}
+												{#if data.replyLikes.find((repLike) => repLike.reply_id == reply.id && repLike.user_id == data.user.id)}
+													<form
+														action="?/removelikeReply"
+														method="POST"
+														class="flex items-center"
+														use:enhance
 													>
-													  <path
-														d="M12.1 21.35l-1.1-1.01C5.14 15.24 2 12.39 2 8.5 
+														<input type="hidden" name="replyId" value={reply.id} />
+														<input type="hidden" name="userId" value={data.user.id} />
+
+														<button
+															class="mt-2 flex flex-col items-center text-red-600 transition-colors duration-100 hover:text-red-700"
+														>
+															<svg
+																xmlns="http://www.w3.org/2000/svg"
+																class="h-5 w-5"
+																viewBox="0 0 24 24"
+																fill="currentColor"
+															>
+																<path
+																	d="M12.1 21.35l-1.1-1.01C5.14 15.24 2 12.39 2 8.5 
 														   2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09 
 														   C13.09 3.81 14.76 3 16.5 3 
 														   19.58 3 22 5.42 22 8.5 
 														   c0 3.89-3.14 6.74-9 11.84l-0.9.81z"
-													  />
-													</svg>
-													<span class="text-xs font-light">{reply.likes}</span>
-												  </button>
-												</form>
-											  {:else}
-												<form action="?/likeReply" method="POST" class="flex items-center" use:enhance>
-												  <input type="hidden" name="replyId" value={reply.id} />
-												  <input type="hidden" name="userId" value={data.user.id} />
-											
-												  <button class="flex flex-col items-center mt-2 text-white hover:text-red-500 transition-colors duration-100">
-													<svg
-													  xmlns="http://www.w3.org/2000/svg"
-													  class="h-5 w-5"
-													  viewBox="0 0 24 24"
-													  fill="none"
-													  stroke="currentColor"
-													  stroke-width="2"
+																/>
+															</svg>
+															<span class="text-xs font-light">{reply.likes}</span>
+														</button>
+													</form>
+												{:else}
+													<form
+														action="?/likeReply"
+														method="POST"
+														class="flex items-center"
+														use:enhance
 													>
-													  <path
-														stroke-linecap="round"
-														stroke-linejoin="round"
-														d="M12.1 21.35l-1.1-1.01C5.14 15.24 2 12.39 2 8.5 
+														<input type="hidden" name="replyId" value={reply.id} />
+														<input type="hidden" name="userId" value={data.user.id} />
+
+														<button
+															class="mt-2 flex flex-col items-center text-white transition-colors duration-100 hover:text-red-500"
+														>
+															<svg
+																xmlns="http://www.w3.org/2000/svg"
+																class="h-5 w-5"
+																viewBox="0 0 24 24"
+																fill="none"
+																stroke="currentColor"
+																stroke-width="2"
+															>
+																<path
+																	stroke-linecap="round"
+																	stroke-linejoin="round"
+																	d="M12.1 21.35l-1.1-1.01C5.14 15.24 2 12.39 2 8.5 
 														   2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09 
 														   C13.09 3.81 14.76 3 16.5 3 
 														   19.58 3 22 5.42 22 8.5 
 														   c0 3.89-3.14 6.74-9 11.84l-0.9.81z"
-													  />
-													</svg>
-													<span class="text-xs font-light">{reply.likes}</span>
-												  </button>
-												</form>
-											  {/if}
-											  {/if}
+																/>
+															</svg>
+															<span class="text-xs font-light">{reply.likes}</span>
+														</button>
+													</form>
+												{/if}
+											{/if}
 										</div>
 									{/if}
 								{/each}

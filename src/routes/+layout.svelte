@@ -68,36 +68,37 @@
 			</nav>
 
 			{#if data.user}
-				<div class="flex items-center justify-center">
-					<form action="/logout?/logout" method="POST" class="p-1">
-						<button
-							class="block cursor-pointer rounded-md bg-teal-500 px-1.5 py-1.5 text-xs font-medium text-white transition hover:bg-teal-700"
-							>Logout</button
+				<li class="group relative list-none">
+					<button class="rounded-full border-1 border-teal-500 p-1 focus:outline-none">
+						<img src={data.user.image} alt="Profile" class="h-12 w-12 rounded-full object-cover" />
+					</button>
+
+					<ul class=" absolute left-0 hidden w-40 rounded-lg bg-white shadow-lg group-hover:block">
+						<form
+							action="/logout?/logout"
+							method="POST"
+							class="block px-4 py-2 text-gray-500 transition hover:text-gray-500/75"
 						>
-					</form>
+							<button
+								class="block cursor-pointer rounded-md bg-teal-500 px-1.5 py-1.5 text-xs font-medium text-white transition hover:bg-teal-700"
+								>Logout</button
+							>
+						</form>
 
-					<details
-						class="block cursor-pointer rounded-md bg-teal-500 px-1.5 py-1.5 text-xs font-medium text-white transition hover:bg-teal-700"
-					>
-						<summary class="cursor-pointer list-none">Delete account</summary>
-
-						<div class="mt-2">
-							<form action="/logout?/deleteAccount" method="POST">
-								<button
-									type="submit"
-									class=" text-white-400 w-full cursor-pointer rounded-md bg-red-500 px-5 py-2 text-xs font-medium transition duration-100 hover:bg-red-700"
-								>
-									Delete
-								</button>
-							</form>
-						</div>
-					</details>
-					<img
-						src={data.user.image}
-						alt="User profile"
-						class="m-2 h-12 w-12 rounded-full border-2 border-teal-500 object-cover"
-					/>
-				</div>
+						<form
+							action="/logout?/deleteAccount"
+							method="POST"
+							class="py-2transition block px-4 text-white hover:text-red-500"
+						>
+							<button
+								type="submit"
+								class=" text-white-400 w-full cursor-pointer rounded-md bg-red-500 px-5 py-2 text-xs font-medium transition duration-100 hover:bg-red-700"
+							>
+								Delete
+							</button>
+						</form>
+					</ul>
+				</li>
 			{:else}
 				<div class="flex items-center justify-center gap-1">
 					<a
@@ -325,7 +326,6 @@
 							</svg>
 						</a>
 					</li>
-
 				</ul>
 			</div>
 		</div>

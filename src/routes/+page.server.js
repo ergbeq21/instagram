@@ -6,7 +6,6 @@ export async function load({ locals }) {
 	const [favRows] = await connection.execute('select * from favorites;');
 	const [upvoteRows] = await connection.execute('select * from upvotes');
 
-
 	return {
 		user: locals.user,
 		favorites: favRows,
@@ -42,7 +41,10 @@ export const actions = {
 
 		const connection = await createConnection();
 		await connection.execute('UPDATE articles SET votes = votes + 1 WHERE id = ?', [voteId]);
-		await connection.execute('insert into upvotes (article_id,user_id) values (?,?)',[voteId,userID]);
+		await connection.execute('insert into upvotes (article_id,user_id) values (?,?)', [
+			voteId,
+			userID
+		]);
 	},
 	downVote: async ({ request }) => {
 		const formData = await request.formData();
@@ -52,6 +54,9 @@ export const actions = {
 
 		const connection = await createConnection();
 		await connection.execute('UPDATE articles SET votes = votes - 1 WHERE id = ?', [voteId]);
-		await connection.execute('delete from upvotes where article_id = ? and user_id = ?',[voteId,userID]);
+		await connection.execute('delete from upvotes where article_id = ? and user_id = ?', [
+			voteId,
+			userID
+		]);
 	}
 };
