@@ -8,12 +8,20 @@ export async function load({ locals }) {
 	let [replyRows] = await connection.execute('select * from reply;');
 
 	let [userRows] = await connection.execute('select * from users');
+	let [upvoteRows] = await connection.execute('select * from upvotes');
+
+	let [likeCommentRows] = await connection.execute('select * from commentLikes');
+
+	let [likeReplyRows] = await connection.execute('select * from replylikes');
 
 	return {
 		comments: rows,
 		replys: replyRows,
 		users: userRows,
-		user: locals.user
+		user: locals.user,
+		upvotes: upvoteRows,
+		commentLikes: likeCommentRows,
+		replyLikes: likeReplyRows
 	};
 }
 export const actions = {
@@ -46,23 +54,57 @@ export const actions = {
 	upVote: async ({ request }) => {
 		const formData = await request.formData();
 		const voteId = await formData.get('voteId');
+		const userID = await formData.get('userID');
 		console.log(voteId);
 
 		const connection = await createConnection();
 		await connection.execute('UPDATE articles SET votes = votes + 1 WHERE id = ?', [voteId]);
+		await connection.execute('insert into upvotes (article_id,user_id) values (?,?)',[voteId,userID]);
+	},
+	downVote: async ({ request }) => {
+		const formData = await request.formData();
+		const voteId = await formData.get('voteId');
+		const userID = await formData.get('userID');
+		console.log(voteId);
+
+		const connection = await createConnection();
+		await connection.execute('UPDATE articles SET votes = votes - 1 WHERE id = ?', [voteId]);
+		await connection.execute('delete from upvotes where article_id = ? and user_id = ?',[voteId,userID]);
 	},
 	likeComment: async ({ request }) => {
 		const formData = await request.formData();
-		const likeId = await formData.get('likeId');
+		const commentId = await formData.get('commentId');
+		const userId = await formData.get('userId');
 
 		const connection = await createConnection();
-		await connection.execute('UPDATE comments SET likes = likes + 1 WHERE id = ?', [likeId]);
+		await connection.execute('UPDATE comments SET likes = likes + 1 WHERE id = ?', [commentId]);
+		await connection.execute('insert into commentLikes (comment_id, user_id) values (?,?)',[commentId,userId]);
+	},
+	removelikeComment: async ({ request }) => {
+		const formData = await request.formData();
+		const commentId = await formData.get('commentId');
+		const userId = await formData.get('userId');
+
+		const connection = await createConnection();
+		await connection.execute('UPDATE comments SET likes = likes - 1 WHERE id = ?', [commentId]);
+		await connection.execute('delete from commentLikes where comment_id = ? and user_id = ?',[commentId,userId]);
 	},
 	likeReply: async ({ request }) => {
 		const formData = await request.formData();
-		const likeReplyID = await formData.get('replylikeId');
+		const replyID = await formData.get('replyId');
+		const userID = await formData.get('userId');
 
 		const connection = await createConnection();
-		await connection.execute('UPDATE reply set likes = likes + 1 where id = ?', [likeReplyID]);
+		await connection.execute('UPDATE reply set likes = likes + 1 where id = ?', [replyID]);
+		await connection.execute('insert into replylikes (user_id,reply_id) values (?,?)',[userID,replyID]);
+	},
+	removelikeReply: async ({ request }) => {
+		const formData = await request.formData();
+		const likeReplyID = await formData.get('replyId');
+		const userID = await formData.get('userId');
+
+		const connection = await createConnection();
+		await connection.execute('UPDATE reply set likes = likes - 1 where id = ?', [likeReplyID]);
+		await connection.execute('DELETE from replylikes where reply_id = ? and user_id = ?',[likeReplyID,userID]);
 	}
 };

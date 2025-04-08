@@ -42,7 +42,6 @@
 				type="file"
 				name="image"
 				id="image"
-				required
 				class="mb-4 w-full rounded-lg border border-gray-300 p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
 			/>
 
