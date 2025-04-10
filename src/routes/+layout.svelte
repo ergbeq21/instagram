@@ -72,39 +72,41 @@
 			</nav>
 
 			{#if data.user}
-				<li class="group relative list-none">
-					<button class="rounded-full border-1 border-teal-500 p-1 focus:outline-none">
-						<img src={data.user.image} alt="Profile" class="h-12 w-12 rounded-full object-cover" />
+			<li class="group relative list-none">
+
+				<button class="rounded-full border border-teal-500 p-1 focus:outline-none">
+				  <img
+					src={data.user.image}
+					alt="Profile"
+					class="h-12 w-12 rounded-full object-cover"
+				  />
+				</button>
+			  
+
+				<ul class="absolute left-0 z-10 mt-2 hidden w-44 space-y-2 rounded-lg bg-white p-3 shadow-lg group-hover:block">
+
+				  <form action="/logout?/logout" method="POST">
+					<button
+					  type="submit"
+					  class="flex w-full items-center justify-center gap-2 rounded-md bg-teal-500 px-3 py-2 text-xs font-medium text-white transition hover:bg-teal-700"
+					>
+					  <LogOut />
+					  Logout
 					</button>
-
-					<ul class=" absolute left-0 hidden w-40 rounded-lg bg-white shadow-lg group-hover:block">
-						<form
-							action="/logout?/logout"
-							method="POST"
-							class="block px-4 py-2 text-gray-500 transition hover:text-gray-500/75"
-						>
-							<button
-								class="block cursor-pointer rounded-md bg-teal-500 px-1.5 py-1.5 text-xs font-medium text-white transition hover:bg-teal-700"
-								><LogOut />
-								</button
-							>
-						</form>
-
-						<form
-							action="/logout?/deleteAccount"
-							method="POST"
-							class="py-2transition block px-4 text-white hover:text-red-500"
-						>
-							<button
-								type="submit"
-								class=" text-white-400 px-1.5 py-1.5 cursor-pointer rounded-md bg-red-500 text-xs font-medium transition duration-100 hover:bg-red-700"
-							>
-							<UserRoundX />
-
-							</button>
-						</form>
-					</ul>
-				</li>
+				  </form>
+			  
+				  <form action="/logout?/deleteAccount" method="POST">
+					<button
+					  type="submit"
+					  class="flex w-full items-center justify-center gap-2 rounded-md bg-red-500 px-3 py-2 text-xs font-medium text-white transition hover:bg-red-700"
+					>
+					  <UserRoundX />
+					  Delete Account
+					</button>
+				  </form>
+				</ul>
+			  </li>
+			  
 			{:else}
 				<div class="flex items-center justify-center gap-1">
 					<a

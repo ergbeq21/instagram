@@ -28,9 +28,11 @@
 <div class="flex items-center justify-center flex-col">
 	{#if data.user}
 	    <Confetti />
-		<p class="text-black-600 transitiontext-center pt-10 pr-14 text-xl font-extralight">
-			Welcome {data.user.username} 
-		</p>
+
+			<p class="text-black-600 transition text-center pt-10 pr-14 text-xl font-extralight">
+				Welcome {data.user.username} 
+			</p>
+		
 		<Confetti />
 
 	{/if}

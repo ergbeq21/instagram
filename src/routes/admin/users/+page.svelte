@@ -11,13 +11,25 @@
 
 
 
-<main class="p-15">
+<main class="p-15 ">
+	<div class="flex bg-gray-100 flex-row p-5 m-5 justify-around items-center font-bold">
+        <p class="">ID</p>
+		<p class="">EMAIL</p>
+		<p class="">USERNAME</p>
+		<p class="">ROLE</p>
+		<p>DELETE</p>
+
+	</div>
+	<div>
 	{#each data.users as user}
 	{#if user.role != 'admin'}
-		<div class="box m-4 p-4 shadow-md transition-all duration-700 hover:scale-101" transition:slide>
-			<p class="font-mono">ID: {user.id}</p>
-			<p class="font-mono">EMAIL: {user.email}</p>
-			<p class="font-mono">USERNAME: {user.username}</p>
+		<div class=" flex flex-row justify-around box m-4 p-1 shadow-md transition-all duration-700 hover:scale-101" transition:slide>
+			<p class="font-mono">{user.id}</p>
+			<p class="font-mono">{user.email}</p>
+			<p class="font-mono">{user.username}</p>
+			<p class="font-mono">{user.role}</p>
+
+
 
 			<form action="?/deleteUser" method="POST">
 				<input type="hidden" name="id" value={user.id} />
@@ -32,6 +44,8 @@
 		</div>
 		{/if}
 	{/each}
+</div>
+
 </main>
 
 
