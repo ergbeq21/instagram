@@ -33,7 +33,6 @@
 				 Welcome to SchulBlick <strong>{data.user.username}</strong>
 			</p>
 		
-		<Confetti />
 
 	{/if}
 	

@@ -3,6 +3,8 @@
 	import { LogOut } from 'lucide-svelte';
 	import { UserRoundX } from 'lucide-svelte';
 	import { injectAnalytics } from '@vercel/analytics/sveltekit'
+	import { UserRoundCog } from 'lucide-svelte';
+
 
 
 
@@ -37,6 +39,10 @@
 
 					<li>
 						<a class="text-gray-500 transition hover:text-gray-500/75" href="/chat"> Chat </a>
+					</li>
+
+					<li>
+						<a class="text-gray-500 transition hover:text-gray-500/75" href="/posts"> Posts </a>
 					</li>
 
 					<li>
@@ -85,7 +91,15 @@
 				</button>
 			  
 
-				<ul class="absolute left-0 z-10 mt-2 hidden w-44 space-y-2 rounded-lg bg-white p-3 shadow-lg group-hover:block">
+				<ul class="absolute left-0 z-10 hidden w-44 space-y-2 rounded-lg bg-white p-3 shadow-lg group-hover:block">
+
+
+				    <a href="/profile" class="flex w-full items-center justify-center gap-2 rounded-md bg-green-500 px-3 py-2 text-xs font-medium text-white transition hover:bg-green-700">
+					
+						<UserRoundCog />
+
+						  Profile
+					</a>
 
 				  <form action="/logout?/logout" method="POST">
 					<button
@@ -342,7 +356,7 @@
 
 		<div class="mt-8 border-t border-gray-100 pt-8">
 			<div class="sm:flex sm:justify-between">
-				<p class="text-xs text-gray-500">&copy; 2025. Ergit Beqiri. All rights reserved.</p>
+				<p class="text-xs text-gray-500">&copy; 2025. Ergit Beqiri. All rights reserved by Ergit Musk.</p>
 
 				<ul class="mt-8 flex flex-wrap justify-start gap-4 text-xs sm:mt-0 lg:justify-end">
 					<li>
