@@ -5,7 +5,7 @@
 	let { form } = $props();
 </script>
 
-<main class="flex h-screen items-center justify-center bg-blue-400 p-4">
+<main class="flex h-screen items-center justify-center bg-green-100 p-4">
 	<div class="w-full max-w-md rounded-2xl bg-white p-8 text-center shadow-lg">
 		<h1 class="mb-6 text-xl font-semibold">Create Article</h1>
 		<form
@@ -29,11 +29,11 @@
 			></textarea>
 			<button
 				type="submit"
-				class="w-full rounded-lg bg-blue-500 py-2 text-white transition hover:bg-blue-600"
+				class="w-full rounded-lg bg-green-500 py-2 text-white transition hover:bg-green-600"
 			>
 				Upload my Article
 			</button>
-			<a href="/admin/api/article" class="text-blue-500">Go back</a>
+			<a href="/admin/api/article" class="text-green-500">Go back</a>
 		</form>
 	</div>
 </main>

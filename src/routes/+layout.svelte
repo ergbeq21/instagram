@@ -2,6 +2,8 @@
 	import '../app.css';
 	import { LogOut } from 'lucide-svelte';
 	import { UserRoundX } from 'lucide-svelte';
+	import { injectAnalytics } from '@vercel/analytics/sveltekit'
+
 
 
 

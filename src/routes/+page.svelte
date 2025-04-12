@@ -30,7 +30,7 @@
 	    <Confetti />
 
 			<p class="text-black-600 transition text-center pt-10 pr-14 text-xl font-extralight">
-				Welcome {data.user.username} 
+				 Welcome to SchulBlick <strong>{data.user.username}</strong>
 			</p>
 		
 		<Confetti />
