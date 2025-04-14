@@ -45,7 +45,7 @@
 		{#if form && form.userInfo}
 			<p class="text-sm text-green-600 mb-3">User found</p>
 			<div class="flex items-center gap-3">
-				<img src={form.userInfo.image} alt="" class="w-10 h-10 rounded-full" />
+				<img src={form.userInfo.image} alt="" class="h-12 w-12 rounded-full object-cover" />
 				<p class="font-medium">{form.userInfo.username}</p>
 			</div>
 		{:else if form && form.error}
@@ -60,7 +60,7 @@
 		{#if form && form.userInfo}
 
 			<div class="flex items-center gap-3 mb-4 border-b pb-3">
-				<img src={form.userInfo.image} alt="" class="w-10 h-10 rounded-full" />
+				<img src={form.userInfo.image} alt="" class="h-12 w-12 rounded-full object-cover" />
 				<p class="font-medium">{form.userInfo.username}</p>
 			</div>
 
@@ -76,7 +76,6 @@
 										: 'bg-blue-500 text-left text-white rounded-bl-none'
 								}`}>
 									<p class="text-xl">{message.text}</p>
-									<p class="text-xs">{message.created_at}</p>
 									<form action="?/deleteYourMessage" method="post" use:enhance>
 		
 										<input type="hidden" name="messageID" value={message.id}>
