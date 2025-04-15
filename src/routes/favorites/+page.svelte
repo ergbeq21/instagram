@@ -1,6 +1,7 @@
 <script>
 	let { data } = $props();
 	import { BookmarkMinus } from 'lucide-svelte';
+	import { enhance } from '$app/forms';
 
 
 </script>
@@ -30,7 +31,7 @@
 											class="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
 										/>
 
-										<form action="?/deleteFavorites" method="POST">
+										<form action="?/deleteFavorites" method="POST" use:enhance>
 											<input type="hidden" name="favID" value={favorite.id} />
 											<button
 												class="absolute top-4 right-4 flex cursor-pointer items-center gap-2 rounded-lg bg-red-500 px-2 py-1 text-white shadow-md transition hover:bg-red-600"

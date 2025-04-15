@@ -49,6 +49,10 @@
 						<a class="text-gray-500 transition hover:text-gray-500/75" href="/about"> About </a>
 					</li>
 
+
+					{#if data.user}
+					{#if data.user.role == 'admin'}
+
 					<li class="group relative">
 						<button class=" rounded px-4 py-2 text-gray-500 transition hover:text-gray-500/75"
 							>Admin</button
@@ -69,6 +73,14 @@
 							</li>
 							<li>
 								<a
+									href="/admin/inbox"
+									class=" block px-4 py-2 text-gray-500 transition hover:text-gray-500/75"
+									>Inbox</a
+								>
+							</li>
+
+							<li>
+								<a
 									href="/admin/comments"
 									class=" block px-4 py-2 text-gray-500 transition hover:text-gray-500/75"
 									>Comments</a
@@ -76,7 +88,11 @@
 							</li>
 						</ul>
 					</li>
+					{/if}
+					{/if}
+
 				</ul>
+
 			</nav>
 
 			{#if data.user}
@@ -213,16 +229,13 @@
 
 					<ul class="mt-6 space-y-4 text-sm">
 						<li>
-							<a href="/" class="text-gray-700 transition hover:opacity-75"> About </a>
+							<a href="/about" class="text-gray-700 transition hover:opacity-75"> About </a>
 						</li>
 
 						<li>
 							<a href="/" class="text-gray-700 transition hover:opacity-75"> Meet the Team </a>
 						</li>
 
-						<li>
-							<a href="/" class="text-gray-700 transition hover:opacity-75"> Accounts Review </a>
-						</li>
 					</ul>
 				</div>
 
@@ -231,15 +244,12 @@
 
 					<ul class="mt-6 space-y-4 text-sm">
 						<li>
-							<a href="/" class="text-gray-700 transition hover:opacity-75"> Contact </a>
+							<a href="/contact" class="text-gray-700 transition hover:opacity-75"> Contact </a>
 						</li>
 
-						<li>
-							<a href="/" class="text-gray-700 transition hover:opacity-75"> FAQs </a>
-						</li>
 
 						<li>
-							<a href="/" class="text-gray-700 transition hover:opacity-75"> Live Chat </a>
+							<a href="/chat" class="text-gray-700 transition hover:opacity-75"> Live Chat </a>
 						</li>
 					</ul>
 				</div>
@@ -256,9 +266,6 @@
 							<a href="/" class="text-gray-700 transition hover:opacity-75"> Returns Policy </a>
 						</li>
 
-						<li>
-							<a href="/" class="text-gray-700 transition hover:opacity-75"> Refund Policy </a>
-						</li>
 					</ul>
 				</div>
 
