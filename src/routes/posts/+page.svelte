@@ -61,6 +61,7 @@
 
 
 		<div class="w-full md:w-1/2 space-y-6">
+			<h1 class="text-center text-2xl font-light text-gray-700">Your Articles</h1>
 			{#each data.articles as article}
 				{#if data.user.username == article.author}
 					<div class="flex space-x-4 rounded-xl bg-white p-4 shadow-md hover:shadow-lg transition-transform transform hover:scale-[1.01]">

@@ -209,9 +209,15 @@
 </section>
 
 
-<div class="fixed bottom-10 right-10 bg-green-200 border-2 border-green-400 rounded-xl shadow-lg p-4 z-50 hover:scale-110 transition-all duration-200">
-	<a href="/contact" class="text-black font-semibol px-4 py-2 rounded transition-colors duration-300">
-	  Contact Us
-	</a>
+<div class="fixed bottom-10 right-10 bg-green-200  border-green-400 rounded-xl shadow-lg p-4 z-50 hover:scale-110 transition-all duration-200">
+	<h1 class="text-center text-teal-700">Need help?</h1>
+
+	<div class="bg-white h-10 w-30 flex items-center justify-center mt-1 rounded-xl ">
+		<a href="/contact" class="font-semibol px-4 py-2 rounded transition-colors duration-300 text-gray-500">
+			Let's chat
+		  </a>
+
+	</div>
+
   </div>
   

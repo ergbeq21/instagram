@@ -17,6 +17,13 @@
 		const res = await fetch(`/admin/api/article/${uuid}`);
 		article = await res.json();
 	});
+
+
+	let state = $state(false);
+	function openClose(){
+		state = true;
+
+	}
 </script>
 
 <div class="flex min-h-screen items-center justify-center">
@@ -102,7 +109,12 @@
 									{/each}
 
 									<div>
+										{#if data.user && data.user.username == comment.name && data.user}
+										<p class="font-mono text-xs text-gray-300">You</p>
+										{:else}
 										<p class="font-mono text-xs text-gray-300">{comment.name}</p>
+
+										{/if}
 										<p class="pt-1.5 font-mono text-xs">{comment.text}</p>
 									</div>
 								</div>
@@ -177,7 +189,7 @@
 							</div>
 
 							<details>
-								<summary class="flex cursor-pointer items-center text-gray-300">
+								<summary class="flex cursor-pointer items-center text-gray-300 " onclick={openClose}>
 									<hr class="m-2 w-10 border-t-1 border-gray-300" />
 									View replies <ChevronDown size="15" class="mt-1 "/>
 
@@ -199,9 +211,28 @@
 												{/each}
 
 												<div>
+													{#if data.user && data.user.username == reply.name && data.user.username != reply.name}
+													<p class="font-mono text-xs text-gray-300">
+														You <span> ▶ {comment.name}</span>
+													</p>
+													{:else if data.user && data.user.username == reply.name && data.user.username == comment.name}
+													<p class="font-mono text-xs text-gray-300">
+														You <span> ▶ You</span>
+													</p>
+
+													{:else if data.user && data.user.username == comment.name}
+													<p class="font-mono text-xs text-gray-300">
+														{reply.name} <span> ▶ You</span>
+													</p>
+													{:else if data.user && reply.name == data.user.username}
+													<p class="font-mono text-xs text-gray-300">
+														You <span> ▶ {comment.name}</span>
+													</p>
+													{:else}
 													<p class="font-mono text-xs text-gray-300">
 														{reply.name} <span> ▶ {comment.name}</span>
 													</p>
+													{/if}
 													<p class="pt-1.5 font-mono text-xs">{reply.text}</p>
 												</div>
 											</div>
