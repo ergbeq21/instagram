@@ -2,27 +2,24 @@
 import { createConnection } from "$lib/db/mysql";
 
 
+
 export async function load({ locals }) {
-	let connection = await createConnection();
 
-	const [inboxRows] = await connection.execute('select * from contacts;');
+    const connection = await createConnection();
 
-    const [sentRows] = await connection.execute('select * from contactAnswer');
-
-
-
-	return {
-		user: locals.user,
+    const [inboxReceived] = await connection.execute('select * from contactAnswer');
+    const [inboxRows] = await connection.execute('select * from contacts');
+    return{
+        user: locals.user,
         contacts : inboxRows,
-        sents : sentRows
+        messages : inboxReceived
 
-	};
+    }
 }
 
 
-
 export const actions = {
-    deleteContact: async ({request}) => {
+    deleteMessageSent: async ({request}) => {
         const formData = await request.formData();
 		const id = formData.get('id');
 		const connection = await createConnection();
@@ -30,7 +27,7 @@ export const actions = {
 
 		await connection.execute('delete from contacts where id = ?', [id]);
 	},
-    deleteSent: async ({request}) => {
+    deleteMessageReceided: async ({request}) => {
         const formData = await request.formData();
         const connection = await createConnection();
         const receivedID =  formData.get('id');
@@ -38,4 +35,3 @@ export const actions = {
         await connection.execute('delete from contactAnswer where id = ?',[receivedID]);
     }
 };
-
