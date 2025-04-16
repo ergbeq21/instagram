@@ -5,6 +5,8 @@
 	import { Bookmark } from 'lucide-svelte';
 	import { Confetti } from 'svelte-confetti';
 	import { MessageSquareMore } from 'lucide-svelte';
+	import { ShieldUser } from 'lucide-svelte';
+
 
 
 
@@ -56,12 +58,24 @@
 				<li class="relative">
 					<div class="group block overflow-hidden">
 						<div class="relative">
-							<img
-								src={article.image}
-								alt={article.description}
-								class="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
-								loading="lazy"
-							/>
+
+							<div class="relative">
+								<img
+								  src={article.image}
+								  alt={article.description}
+								  class="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
+								  loading="lazy"
+								/>
+							  
+								{#if article.author == 'Ergit07'}
+								  <div class="absolute top-2 left-2 z-10">
+									<ShieldUser size="30" class="text-white bg-black/40 rounded-full p-1" />
+								  </div>
+								{/if}
+							  </div>
+							  
+
+
 
 							<!--Add to favourites function-->
 
@@ -73,6 +87,7 @@
 											<button
 												class="absolute top-2 right-2 flex cursor-pointer items-center gap-1 rounded bg-red-600 px-2 py-1 text-xs text-white shadow-md transition duration-500 hover:bg-red-500"
 											>
+
 											<BookmarkCheck />
 
 											</button>
@@ -86,6 +101,7 @@
 											class="absolute top-2 right-2 flex cursor-pointer items-center gap-1 rounded bg-teal-600 px-2 py-1 text-xs text-white shadow-md transition duration-500 hover:bg-teal-500"
 										>
 										<Bookmark />
+
 
 										</button>
 									</form>

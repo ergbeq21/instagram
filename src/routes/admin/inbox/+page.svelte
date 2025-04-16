@@ -62,7 +62,7 @@
 		>
 
 			<div>
-				<p class="font-mono">ID: {sent.id}</p>
+				<p class="font-mono">Contact_id: {sent.contact_id}</p>
 				<p class="font-mono">Text: {sent.text}</p>
 			
 
