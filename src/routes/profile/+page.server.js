@@ -16,34 +16,23 @@ export async function load({ locals }) {
 }
 
 export const actions = {
-    changeProfilePicture: async ({request}) =>{
-        const formData = await request.formData();
+    changeInfo: async ({request}) =>{
 
         const connection = await createConnection();
+        const formData = await request.formData();
 
-        const image = formData.get('image');
-        const userID = formData.get('userID')
+        const bio = formData.get('bio');
+        const user_id = formData.get('userID')
 
+        const [result] = await connection.execute('update users set bio = ? where id = ?',[
+            bio,
+            user_id
 
-        if (!image) {
-            throw error(400, { message: 'No file to upload.' });
-        }
-
-        const { url } = await put('insta-images/' + image.name, image, {
-            access: 'public',
-            token: BLOB_READ_WRITE_TOKEN
-        });
-
-        const [result] = await connection.execute(
-            'Update users set image = ? where id = ? ',
-            [url, userID]
-        );
+        ])
 
         if (result.affectedRows) {
             redirect(303, '/');
         }
-
-        return { uploaded: url };
-
+    
     }
 }

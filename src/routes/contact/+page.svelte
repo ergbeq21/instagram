@@ -8,7 +8,7 @@
 </script>
 
 
-{#if data.user}
+
 <div class="min-h-screen">
 
 	<section class="relative  py-20 bg-green-600 rounded ">
@@ -171,20 +171,5 @@
 	</section>
 </div>
 
-{:else}
- 
- <div class="flex flex-col items-center justify-center h-110 bg-gray-100 p-4">
-     <div class="bg-white shadow-xl rounded-2xl p-8 max-w-md w-full text-center space-y-6">
-       <h1 class="text-2xl font-semibold text-gray-800">
-         Welcome! Please create an account or log in
-       </h1>
-       <div class="flex items-center justify-center gap-4">
-         <a href="/login" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Login</a>
-         <span class="text-gray-500">or</span>
-         <a href="/register" class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">Sign Up</a>
-       </div>
-     </div>
-   </div>  
- 
- {/if}
+
 
