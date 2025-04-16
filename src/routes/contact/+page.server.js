@@ -30,8 +30,6 @@ export const actions = {
         if (result.affectedRows) {
             redirect(303, '/');
         }
-
-
         
     }
 }

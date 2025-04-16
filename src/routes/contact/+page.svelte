@@ -1,65 +1,171 @@
 <script>
-	import Warning from '$lib/components/Warning.svelte';
-	let { data, form } = $props();
-	import { enhance } from '$app/forms';
-	import { ShieldBan } from 'lucide-svelte';
+	import { fly } from 'svelte/transition';
+	import { Mail, Phone, MapPin, Clock, Send, Building2, Users } from 'lucide-svelte';
+	import { toast } from 'svelte-sonner';
 
-
+	
+	let {data,form} = $props();
 </script>
 
+<div class="min-h-screen">
 
-{#if data.user}
-
-<div class="flex min-h-screen items-center justify-center bg-gray-100">
-		<div class="w-full max-w-md rounded-lg bg-white p-8 shadow-lg">
-			<form action="?/contact" method="POST" use:enhance>
-				<h1 class="mb-6 text-center text-2xl font-semibold text-gray-800">Contact Us</h1>
-				<input
-					type="hidden"
-                    name="username"
-                    value={data.user.username}
-					class="mb-4 w-full rounded-lg border border-gray-300 p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-				/>
-                <label for="Topic" class="mb-2 block text-sm font-medium text-gray-700">Topic</label>
-                <textarea
-					name="topic"
-					placeholder="Write your topic here..."
-					class="h-15 w-full rounded-lg border border-gray-300 mb-3 resize-none"
-				></textarea>
-
-
-
-				<label for="Your message" class="mb-2 block text-sm font-medium text-gray-700">Message</label>
-                <textarea
-					name="text"
-					placeholder="Write your message here..."
-					class="h-40 w-full rounded-lg border border-gray-300 mb-3 resize-none"
-				></textarea>
-
-				<button
-					type="submit"
-					class="w-full rounded-lg bg-blue-500 p-3 text-white hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-					>Send message</button
+	<section class="relative  py-20 bg-green-600 rounded ">
+		<div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+			<div class="text-center">
+				<h1
+					class="text-4xl font-bold  text-white sm:text-5xl md:text-6xl"
+					in:fly={{ y: 20, duration: 800 }}
 				>
-			</form>
-		
-
+					Get in Touch
+				</h1>
+				<p
+					class="mx-auto mt-6 max-w-2xl text-lg text-white "
+					in:fly={{ y: 20, duration: 800, delay: 200 }}
+				>
+					Have questions or need assistance? We're here to help. Reach out to us through any of the
+					following channels.
+				</p>
+			</div>
 		</div>
+	</section>
+
+	<section class="py-16">
+		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+			<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+
+				<div class="group rounded-2xl bg-white p-6 shadow-lg transition-all duration-300 hover:shadow-xl" in:fly={{ y: 20, duration: 800, delay: 300 }}>
+					<div class="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white">
+						<Mail class="h-6 w-6" />
+					</div>
+					<h3 class="mt-4 text-lg font-semibold text-gray-900">Email Us</h3>
+					<p class="mt-2 text-gray-600">support@example.com</p>
+				</div>
+
+
+				<div class="group rounded-2xl bg-white p-6 shadow-lg transition-all duration-300 hover:shadow-xl" in:fly={{ y: 20, duration: 800, delay: 400 }}>
+					<div class="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-50 text-purple-600 group-hover:bg-purple-600 group-hover:text-white">
+						<Phone class="h-6 w-6" />
+					</div>
+					<h3 class="mt-4 text-lg font-semibold text-gray-900">Call Us</h3>
+					<p class="mt-2 text-gray-600">+355 69 542 2977</p>
+				</div>
+
+
+				<div class="group rounded-2xl bg-white p-6 shadow-lg transition-all duration-300 hover:shadow-xl" in:fly={{ y: 20, duration: 800, delay: 500 }}>
+
+					<div class="flex h-12 w-12 items-center justify-center rounded-xl bg-pink-50 text-pink-600 group-hover:bg-pink-600 group-hover:text-white">
+						<MapPin class="h-6 w-6" />
+					</div>
+
+					<h3 class="mt-4 text-lg font-semibold text-gray-900">Visit Us</h3>
+					<p class="mt-2 text-gray-600">123 Business Street, City, Country</p>
+				</div>
+
+
+				<div class="group rounded-2xl bg-white p-6 shadow-lg transition-all duration-300 hover:shadow-xl" in:fly={{ y: 20, duration: 800, delay: 600 }}>
+					<div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white">
+						<Clock class="h-6 w-6" />
+					</div>
+					<h3 class="mt-4 text-lg font-semibold text-gray-900">Business Hours</h3>
+					<p class="mt-2 text-gray-600">Mon - Fri: 9:00 AM - 6:00 PM</p>
+				</div>
+			
+			</div>
+		</div>
+	</section>
+
+
+	<section class="py-16">
+		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+			<div class="grid grid-cols-1 gap-12 lg:grid-cols-2">
+
+				<div
+					class="rounded-2xl bg-white p-8 shadow-lg"
+					in:fly={{ x: -20, duration: 800, delay: 700 }}
+				>
+					<h2 class="text-2xl font-bold text-gray-900">Send us a Message</h2>
+					<p class="mt-2 text-gray-600">Fill out the form below and we'll get back to you as soon as possible.</p>
+
+
+					<form action="?/contact" class="mt-8 space-y-6" method="POST">
+						
+						<input
+								type="hidden"
+								name="username"
+								value={data.user.username}
+
+							/>
+
+						<div>
+							<label for="subject" class="block text-sm font-medium text-gray-700">Subject</label>
+							<input
+								type="text"
+								name="topic"
+								required
+								class="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 shadow-sm"
+								placeholder="What's this about?"
+							/>
+						</div>
+
+						<div>
+							<label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+							<textarea
+								required
+								rows="4"
+								name="text"
+								class="mt-1 block w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 shadow-sm"
+								placeholder="Your message..."
+							></textarea>
+						</div>
+
+						<button
+							class="group relative flex w-full items-center bg-green-600 justify-center rounded-lg  px-6 py-3 text-sm font-semibold text-white cursor-pointer  ">
+								<span class="mr-1">Send Message</span><Send size="20" />
+								
+						</button>
+					</form>
+
+
+				</div>
+
+
+				<div class="space-y-8" in:fly={{ x: 20, duration: 800, delay: 700 }}>
+
+					<div class="rounded-2xl bg-white p-8 shadow-lg">
+						<div class="flex items-center gap-4">
+							<div class="flex h-12 w-12 items-center justify-center rounded-xl bg-green-50 text-green-600">
+								<Building2 class="h-6 w-6" />
+							</div>
+							<div>
+								<h3 class="text-lg font-semibold text-gray-900">Company Information</h3>
+								<p class="mt-1 text-gray-600">Learn more about our company and mission.</p>
+							</div>
+						</div>
+						<div class="mt-6 space-y-4 text-gray-600">
+							<p>We are dedicated to providing the best service to our customers.</p>
+							<p>Our team of experts is always ready to help you with any questions or concerns.</p>
+						</div>
+					</div>
+
+
+					<div class="rounded-2xl bg-white p-8 shadow-lg">
+						<div class="flex items-center gap-4">
+							<div class="flex h-12 w-12 items-center justify-center rounded-xl bg-green-50 text-green-600">
+								<Users class="h-6 w-6" />
+							</div>
+							<div>
+								<h3 class="text-lg font-semibold text-gray-900">Our Team</h3>
+								<p class="mt-1 text-gray-600">Meet the people behind our success.</p>
+							</div>
+						</div>
+						<div class="mt-6 space-y-4 text-gray-600">
+							<p>Our team consists of experienced professionals who are passionate about what they do.</p>
+							<p>We work together to ensure the best possible experience for our customers.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 </div>
-{:else}
-
-<div class="flex flex-col items-center justify-center h-110 bg-gray-100 p-4">
-    <div class="bg-white shadow-xl rounded-2xl p-8 max-w-md w-full text-center space-y-6">
-      <h1 class="text-2xl font-semibold text-gray-800">
-        Welcome! Please create an account or log in
-      </h1>
-      <div class="flex items-center justify-center gap-4">
-        <a href="/login" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Login</a>
-        <span class="text-gray-500">or</span>
-        <a href="/register" class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">Sign Up</a>
-      </div>
-    </div>
-  </div>  
-
-{/if}
 

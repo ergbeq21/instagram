@@ -6,6 +6,8 @@
 	import { Confetti } from 'svelte-confetti';
 	import { MessageSquareMore } from 'lucide-svelte';
 	import { ShieldUser } from 'lucide-svelte';
+	import { fly } from 'svelte/transition';
+
 
 
 
@@ -31,9 +33,10 @@
 	{#if data.user}
 	    <Confetti />
 
-			<p class="text-black-600 transition text-center pt-10 pr-14 text-xl font-extralight">
-				 Welcome to SchulBlick <strong>{data.user.username}</strong>
-			</p>
+		<p class="text-black-600 transition text-center pt-10 pr-14 text-xl font-extralight" >
+	   Welcome to SchulBlick <strong>{data.user.username}</strong>
+	   </p>
+	 
 		
 
 	{/if}
@@ -45,9 +48,12 @@
 <section>
 	<div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
 		<header>
-			<h2 class="sm:text-3 text-xl font-bold text-gray-900">Image Collection</h2>
-
-			<p class="mt-4 max-w-md text-gray-500">
+			<h2 class="sm:text-3 text-xl font-bold text-gray-900" in:fly={{ y: 20, duration: 800, delay: 200 }} 
+			
+			>Image Collection</h2>
+ 
+			<p class="mt-4 max-w-md text-gray-500" in:fly={{ y: 20, duration: 800, delay: 200 }}
+			>
 				Ein modernes und interaktives Design, das es Nutzern ermöglicht, Artikel zu liken,
 				Kommentare zu hinterlassen und Antworten zu sehen
 			</p>
@@ -55,7 +61,7 @@
 
 		<ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
 			{#each articles as article}
-				<li class="relative">
+				<li class="relative" in:fly={{ y: 30, duration: 800, delay: 400 }}>
 					<div class="group block overflow-hidden">
 						<div class="relative">
 
