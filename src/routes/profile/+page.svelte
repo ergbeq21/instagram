@@ -34,7 +34,7 @@
 	<div class="flex flex-row gap-6 ml-20 text-white" in:fly={{ y: 20, duration: 800, delay: 200 }} >
 		<div>
 
-			<img src={data.user.image} alt="" class=" h-30 w-30 bg-cover rounded-full" >
+			<img src={data.user.image} alt="" class=" h-30 w-30 object-cover rounded-full" >
 
 		</div>
 		<div class="mt-7">

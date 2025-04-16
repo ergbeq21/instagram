@@ -40,7 +40,7 @@
 						<Mail class="h-6 w-6" />
 					</div>
 					<h3 class="mt-4 text-lg font-semibold text-gray-900">Email Us</h3>
-					<p class="mt-2 text-gray-600">support@example.com</p>
+					<p class="mt-2 text-gray-600">ErgBeq@htl-shkoder.com</p>
 				</div>
 
 
@@ -49,7 +49,7 @@
 						<Phone class="h-6 w-6" />
 					</div>
 					<h3 class="mt-4 text-lg font-semibold text-gray-900">Call Us</h3>
-					<p class="mt-2 text-gray-600">+355 69 542 2977</p>
+					<p class="mt-2 text-gray-600">+355 69 542 3977</p>
 				</div>
 
 
@@ -60,7 +60,7 @@
 					</div>
 
 					<h3 class="mt-4 text-lg font-semibold text-gray-900">Visit Us</h3>
-					<p class="mt-2 text-gray-600">123 Business Street, City, Country</p>
+					<p class="mt-2 text-gray-600">Shkoder, Albania</p>
 				</div>
 
 
