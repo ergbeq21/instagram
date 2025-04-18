@@ -231,7 +231,7 @@
 </section>
 
 
-<div class="fixed bottom-10 right-10 bg-green-400   rounded-xl shadow-lg p-4 z-50 hover:scale-110 transition-all duration-200">
+<div class="fixed ms:bottom-10 bottom-3 ms:right-10 right-4 bg-green-400   rounded-xl shadow-lg ms:p-4  p-2 z-50 hover:scale-110 transition-all duration-200">
 	<h1 class="text-center text-white">Need help?</h1>
 
 	<div class="bg-white h-10 w-30 flex items-center justify-center mt-1 rounded-xl ">
