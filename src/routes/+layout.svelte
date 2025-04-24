@@ -58,7 +58,7 @@
 			<div class="flex items-center">
 				{#if data.user}
 					<div class="relative group">
-						<button class="flex h-10 w-10 items-center justify-center rounded-full overflow-hidden border-2 border-teal-500 focus:outline-none">
+						<button class="flex h-13 w-13 items-center justify-center rounded-full overflow-hidden border-2 border-teal-500 focus:outline-none">
 							<img
 								src={data.user.image}
 								alt="Profile"
@@ -66,7 +66,7 @@
 							/>
 						</button>
 						
-						<div class="absolute right-0 mt-2 w-48 rounded-md bg-white shadow-lg hidden group-hover:block z-10">
+						<div class="absolute right-0 mt-0 w-48 rounded-md bg-white shadow-lg hidden group-hover:block z-10">
 							<a href="/profile" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
 								<UserRoundCog size={16} />
 								Profile
