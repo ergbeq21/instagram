@@ -28,10 +28,15 @@
 
 <div class="flex min-h-screen items-center justify-center">
 	{#if article}
-		<div class="w-96 rounded border p-4 text-center shadow">
-			<img src={article.image} alt={article.description} class="h-auto w-full rounded" />
-			<h1 class="mt-2 text-lg font-medium">{article.description}</h1>
-			<p class="text-xs text-gray-500">By {article.author}</p>
+		<div class="w-full sm:h-150 rounded border border-gray-100 shadow-2xl p-4 text-center ml-10 mr-10 flex justify-between sm:flex-row flex-col">
+			<div>
+				<img src={article.image} alt={article.description} class="sm:h-140 sm:w-140 w-100 h-100 rounded object-cover border border-white shadow hover:scale-102 transition-transform duration-400" />
+
+			</div>
+			<div class="flex flex-col sm:mr-21  justify-center items-center">
+
+			<h1 class="mt-2 text-4xl font-medium">{article.description}</h1>
+			<p class="text-2xl text-gray-500">By {article.author}</p>
 			<div>
 				{#if data.user}
 					{#if data.upvotes.find((upvote) => upvote.article_id == article.id && upvote.user_id == data.user.id)}
@@ -55,7 +60,7 @@
 				<p class="m-2 text-xs text-gray-500">Votes: {article.votes}</p>
 			</div>
 
-			<form action="?/writeComment" method="POST" class="flex flex-col p-4" use:enhance>
+			<form action="?/writeComment" method="POST" class="flex flex-col p-4 sm:w-150 w-100" use:enhance>
 				<h2 class="text-sm text-blue-600">Send a comment</h2>
 				<input type="hidden" value={article.id} name="articleID" />
 				{#if data.user}
@@ -91,7 +96,7 @@
 				>
 			</form>
 
-			<div class="mt-4 w-full rounded-lg bg-blue-100 p-4 text-sm">
+			<div class="mt-4 sm:w-150 w-100 rounded-lg bg-blue-100 p-4 text-sm ">
 				<h2 class="text-left font-semibold text-gray-800">All Comments</h2>
 				{#each data.comments as comment}
 					{#if article.id == comment.article_id}
@@ -354,8 +359,9 @@
 					{/if}
 				{/each}
 			</div>
+			<a href="/" class="mt-2 text-blue-500">Go Back</a>
 
-			<a href="/" class="mt-2 text-xs text-blue-500">Go Back</a>
+			</div>
 		</div>
 	{/if}
 </div>
