@@ -8,6 +8,7 @@
 </script>
 
 
+{#if data.user}
 
 <div class="min-h-screen">
 
@@ -171,5 +172,10 @@
 	</section>
 </div>
 
+{:else}
 
+<div class="bg-teal-400 border rounded m-10 text-center p-10">
+	<h1 class="font-mono text-gray-700">Create a account or login to an existing account to contact us</h1>
+</div>
 
+{/if}
