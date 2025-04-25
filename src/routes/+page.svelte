@@ -14,11 +14,14 @@
 
 	let { data } = $props();
 
+	let loading = $state(true);
+
 	let articles = $state([]);
 
 	onMount(async () => {
 		const res = await fetch('/admin/api/article');
 		articles = await res.json();
+		loading = false;
 	});
 
 	
@@ -28,6 +31,12 @@
 		
 
 </script>
+
+{#if loading}
+  <div class="flex justify-center items-center h-screen">
+    <div class="animate-spin rounded-full h-50 w-50 border-t-2 border-b-2 border-blue-500"></div>
+  </div>
+{/if}
 
 <div class="flex items-center justify-center flex-col">
 	{#if data.user}
